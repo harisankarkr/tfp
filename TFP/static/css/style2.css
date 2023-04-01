@@ -1,0 +1,276 @@
+.prd-heading{
+    padding: 2rem 0 0 5rem;
+}
+
+.prd-det{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.sec-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 20%;
+    /* background-color: aqua; */
+}
+
+.sec-1 > img{
+    width: 8rem;
+    height: auto;
+    margin-top: .5rem ;
+    cursor: pointer;
+    object-fit:cover;
+}
+
+.sec-1 > img:hover{
+    width: 9rem;
+    transition: 0.3s;
+    box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
+}
+
+.sec-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    /* background-color: aquamarine; */
+}
+
+.sec-2 img{
+    width :80%;
+    height: auto;
+}
+
+.sec-3{
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 2rem 0 3rem;
+    /* background-color: aliceblue; */
+}
+
+.desig-det{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 3rem;
+}
+
+.desig-det > img{
+    width : 5rem;
+    height: 5rem;
+    border: 1px solid black;
+    object-fit:cover;
+    border-radius: 50%;
+}
+
+.desig-det > h3{
+    padding-left: 2rem;
+}
+
+.sec-3 a{
+    text-decoration: none;
+    color: black;
+}
+
+.btns{
+    padding-top: 1rem;
+}
+
+#pr{
+    padding-left: 2rem;
+}
+
+input[type=radio] {
+    accent-color: black;
+}
+
+.whish-btn{
+    border: 0px;
+    height: 3rem;
+    width: auto;
+    color: tomato;
+    font-size: x-large;
+    background-color: white;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.whish-btn:active{
+    color: red;
+}
+
+.cart-btn{
+    border: 0px;
+    width: 10rem;
+    height: 3rem;
+    font-size: large;
+    background-color: #323232;
+    color: white;
+    cursor: pointer;
+}
+
+.cart-btn:hover{
+    transition: 0.3s;
+    box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
+}
+
+.buy-btn{
+    border: 0px;
+    width: 7rem;
+    height: 3rem;
+    font-size: large;
+    background-color: #6f926e;
+    color: white;
+    cursor: pointer;
+}
+
+.buy-btn:hover{
+    background-color: #8dac8c;
+    transition: 0.3s;
+    box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
+}
+
+
+
+/* spec & rew */
+.spec-rew{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.spec{
+    width: 40%;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rew{
+    width: 60%;
+    height: 20rem;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow:auto;
+}
+
+table {
+    width: 80%;
+    height: 8rem;
+}
+
+.sp-tt{
+    font-weight: bold;
+    font-size: large;
+}
+
+.sp-tt{
+    font-weight: 700;
+    font-size: medium;
+}
+
+.rev-box{
+    width: 95%;
+    padding: 1%;
+    margin: 1%;
+    background-color: #e2e6ec;
+}
+
+.rev-box p{
+    font-size: smaller;
+}
+
+.rev-box h4{
+    font-size: medium;
+}
+
+
+/* size chart */
+.size-chart{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.size-chart p{
+    font-weight: bold;
+}
+
+
+/* product card */
+.rel-box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 3rem 0  3rem 0;
+}
+
+.rel-box a{
+    text-decoration: none;
+    color: black;
+}
+
+.prd-card{
+    margin: 2rem;
+    width: 16rem;
+    height: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 3.5px 7.0px 7.0px #e2e6ec;
+    /* border: 2px solid #e2e6ec; */
+    /* background-color: #e2e6ec; */
+}
+
+.prd-card:hover{
+    box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
+}
+
+.prd-card > img{
+    width: 100%;
+    height: 75%;
+    object-fit:cover;
+}
+
+
+
+/* user page 2 style */
+
+.sel-cat{
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 10rem;
+}
+
+.sel-cat select{
+    width: 12rem;
+    height: 2rem;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.sel-cat label{
+    padding-left: 3rem;
+    font-size: large;
+}

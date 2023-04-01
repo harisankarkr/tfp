@@ -1,0 +1,175 @@
+/* index style */
+/* ------------------------------------------------------------------------------------------ */
+
+.main{
+  background-image: url('../imges/in1.jpg');
+  background-size: cover;
+  background-position: center;
+  width:100%;
+  height: 40rem;
+  display: flex;
+  align-items: center;
+  animation: slide 10s infinite;
+}
+
+@keyframes slide {
+  0% {
+    background-image: url("../imges/in1.jpg");
+  }
+  33% {
+    background-image: url("../imges/in2.jpg");
+  }
+  66% {
+    background-image: url("../imges/in3.jpg");
+  }
+}
+
+.log-box{
+  /* background-color: cadetblue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 20rem;
+  height: 26rem;
+  margin-left: 8rem;
+  margin-top: 4rem;
+}
+
+.log-box a{
+  text-decoration: none;
+  color: rgb(166, 166, 226);
+}
+
+.ssw{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+}
+
+/* customer login */
+.cust-login{
+  background-image: url('../imges/custlog.jpg');
+  color: white;
+  width: 100%;
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.cust-login input{
+  width: 80%;
+  border: 0;
+  padding: .5rem .5rem .5rem 1rem;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.cust-login button{
+  background-color: black;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  width: 40%;
+  height: 2.5rem;
+  font-size: large;
+}
+
+/* customer login */
+.desg-login{
+  background-image: url('../imges/desgbg.jpg');
+  color: white;
+  width: 100%;
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.desg-login input{
+  width: 80%;
+  border: 0;
+  padding: .5rem .5rem .5rem 1rem;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.desg-login button{
+  background-color: white;
+  color: black;
+  border: 0;
+  border-radius: 12px;
+  width: 40%;
+  height: 2.5rem;
+  font-size: large;
+  font-weight: bold;
+}
+
+
+/* title box */
+.title-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60rem;
+  justify-content: center;
+}
+
+.title-box h1{
+  font-size: 85px;
+}
+
+.title-box h4{
+  color: rgb(95, 95, 95);
+  font-size: 25px;
+  font-style: italic;
+  font-weight: lighter;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+
+/* radio button - swith */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: 3px;
+  background-color: #333;
+  border-radius: 50%;
+}
+
+input[type="radio"]:hover {
+  border-color: #333;
+}
+
+
+/* error msg */
+#errMsg{
+  font-size: small;
+  color: rgb(219, 111, 111);
+}

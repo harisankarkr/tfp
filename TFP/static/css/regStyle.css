@@ -1,0 +1,16 @@
+body{
+    background-image: url('../imges/regbgg.jpg');
+    background-position: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+  }
+
+.main-reg{
+    width: 80%;
+    margin: 4rem 0 0 5rem;
+    color: white;
+    font-size: large;
+}
+
+

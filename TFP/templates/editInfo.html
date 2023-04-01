@@ -1,0 +1,39 @@
+{% extends 'designer_base.html' %}
+
+{% block title %}
+Update Stock
+{% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+    
+<form action="">
+
+    <div class="add-main">
+
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Logo/Dp</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control" id="inputPassword3">
+            </div>
+          </div>
+  
+          <div class="row mb-6">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Bio</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword3">
+            </div>
+          </div>
+
+        <div>
+            <!-- buttons -->
+            <button type="submit" class="add-btn">Save</button>
+        </div>
+
+    </div>
+
+</form>
+ 
+{% endblock %}

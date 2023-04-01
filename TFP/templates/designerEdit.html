@@ -1,0 +1,50 @@
+{% extends 'designer_base.html' %}
+
+{% block title %}
+Products
+{% endblock%}
+
+{% load static %}
+<!-- designer profile banner -->
+
+<!-- <div class="designer-banner">
+    <img src="{% static 'imges/bannerSkel.jpg' %}" alt="">
+</div> -->
+
+
+{% block content %}
+
+
+<!-- ḍesigner products -->
+
+<div class="prd-det">
+    <!-- main img sec-->
+    <div class="sec-2">
+        <img src="{% static 'imges/skel.jpg' %}" alt="">
+    </div>
+
+        <!-- sub img sec -->
+        <div class="sec-1">
+            <img src="{% static 'imges/skel.jpg' %}" alt="">
+            <img src="{% static 'imges/skel.jpg' %}" alt="">
+            <img src="{% static 'imges/skel.jpg' %}" alt="">
+        </div>
+    
+    <!-- desginer/product details -->
+    <div class="sec-3">
+        <div>
+            <!-- prd det -->
+            <h3>Product Details</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quis, aperiam mollitia ipsam ratione
+                qui laboriosam nobis libero, aliquid nulla eaque, corporis ea alias? Architecto impedit fugiat enim
+                necessitatibus maiores.</p>
+
+            <!-- price -->
+            <h3 id="pr">&#x20b9; 799.00 </h3>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}
+

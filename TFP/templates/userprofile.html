@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFP | User Profile</title>
+
+    
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- css -->
+    <!-- style-one -->
+    <link rel="stylesheet" href="css/style1.css">
+    <!-- style-two -->
+    <link rel="stylesheet" href="css/style2.css">
+    <!-- style-three -->
+    <link rel="stylesheet" href="css/style3.css">
+
+    <!-- JS -->
+    <!-- js one -->
+    <script src="js/javascript1.js"></script>
+
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+  <!-- nav bar -->
+  <div class="nav">
+
+    <!-- logo -->
+    <div class="logo">
+     <h2> <a href="user1.html"> The Fashoin Project</a></h2>
+    </div>
+
+    <!-- search bar -->
+    <div class="search">
+      <form action="" method="post">
+        <input type="text" class="search-bar" placeholder="search for designers...">
+        <button type="submit" class="search-button"><i class="fa fa-search fa-lg"></i></button>
+      </form>
+    </div>
+
+    <!-- user profile -->
+    <div>
+        <a href="userprofile.html" class="user-profile"><i title="User Profile" class="fa-regular fa-user fa-lg"></i></a>
+      </div>
+  
+      <!-- whish list -->
+      <div >
+        <a href="whishlist.html" class="whish-list"><i title="whish list" class="fa-regular fa-heart fa-lg"></i></a>
+      </div>
+  
+      <!-- cart -->
+      <div >
+        <a href="cart.html" class="cart"><i title="cart" class="fa-solid fa-bag-shopping fa-lg"></i></a>
+      </div>
+  
+      <!-- logout -->
+      <div >
+        <a href="#" class="logout"><i title="Sign out" class="fa-solid fa-right-from-bracket fa-lg"></i></a>
+      </div>
+
+  </div>
+
+  <!-- space -->
+  <div class="space">
+
+  </div>
+  
+  <!-------------------------------------------------------------------------------------------------------------- -->
+    
+    <div class="prd-heading">
+        <h4>Welcome Back {User name}</h4>
+    </div>
+
+    <!-- nav for user profile (in style-3) -->
+    <div class="prf-nav">
+        <button id="user-btn1">Manage Account</button>
+        <button id="user-btn2">Your Orders</button>
+        <button id="user-btn3">Purchase History</button>
+    </div>
+
+
+    <!-- manage your acconut -->
+    <div class="man-ac">
+        <div>
+            <h4>Personal Details</h4>
+            <p>User Name</p>
+            <p>Email id</p>
+            <p>Phone</p>
+        </div>
+
+        <div id="view-ad">
+            <h4>Address</h4>
+            <p>House No/Name</p>
+            <p>Land Mark</p>
+            <p>City</p>
+            <p>Pin Code</p>
+            <button class="edit-btn" id="ed-ad-btn">Edit Address</button>
+        </div>
+
+        <div id="edit-ad">
+            <input type="text" placeholder="House No/Name">
+            <input type="text" placeholder="Land Mark">
+            <input type="text" placeholder="City">
+            <input type="text" placeholder="Pin Code">
+            <button class="edit-btn" id="save-ad">Save Changes</button>
+        </div>
+    </div>
+
+
+    <!-- Your Orders -->
+    <!-- <div class="prd-heading">
+        <h4>Your Orders</h4>
+    </div> -->
+
+    <div class="rel-box">
+            <div class="prd-card">
+                <img src="imges/skel.jpg" alt="">
+                <p>Arriving on dd/mm/yyyy</p>
+            </div>
+
+                <div class="prd-card">
+                    <img src="imges/skel.jpg" alt="">
+                    <p>Arriving on dd/mm/yyyy</p>
+                </div>
+    </div>
+
+
+    <!-- History -->
+    <!-- <div class="prd-heading">
+        <h4>Purchase History</h4>
+    </div> -->
+
+    <div class="his-tabel">
+        <table>
+            <!-- headings -->
+            <tr>
+                <th>Product</th>
+                <th>Details</th>
+                <th>Date</th>
+                <th>Review</th>
+            </tr>
+
+            <!-- table content -->
+            <tr>
+                <td><img src="imges/skel.jpg" alt=""></td>
+                <td><label for="size">Men T-shirt</label></td>
+                <td><label for="date">dd/mm/yyyy</label></td>
+                <td><label id="rev" for="review">Lorem ipsum dolor sit amet consecrehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>
+                <td><button title="Review" type="submit" class="edit-btn1"><i class="fa-solid fa-pen fa-lg"></i></button></td>
+            </tr>
+
+            <!-- table content -->
+            <tr>
+                <td><img src="imges/skel.jpg" alt=""></td>
+                <td><label for="size">Men T-shirt</label></td>
+                <td><label for="date">dd/mm/yyyy</label></td>
+                <td><label id="rev" for="review">abo maxime reprehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>
+                <td><button title="Review" type="submit" class="edit-btn1"><i class="fa-solid fa-pen fa-lg"></i></button></td>
+            </tr>
+        </table>
+    </div>
+
+
+</body>
+</html>

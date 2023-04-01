@@ -1,0 +1,83 @@
+.space{
+    width: 100%;
+    height: 1.5rem;
+}
+
+.cust-info{
+    display: flex;
+    margin: auto;
+    width: 90%;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 1px solid black; */
+}
+
+.cust-info table{
+    width: 40%;
+    /* border: 1px solid black; */
+}
+
+.cust-info tr{
+    padding: .5rem;
+}
+
+.cust-info td{
+    text-align:right;
+    height: 2rem;
+    padding: .5rem;
+}
+
+.cust-info input{
+    border: 0;
+    padding-left: 1.5rem;
+    width: 20rem;
+    background-color:#ddd;
+}
+
+.pay-det{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 0;
+    padding: 4rem;
+    border: 2px solid #6f926e;
+    /* background-color: #a1cf9f; */
+    /* color: white; */
+}
+
+/* .pay-det:hover{
+    color: white;
+    background-color: #6f926e;
+} */
+
+/* btn */
+.cnf-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cnf-btn button{
+    border: 0px;
+    width: 13rem;
+    height: 3rem;
+    font-size: large;
+    background-color: #6f926e;
+    color: white;
+    cursor: pointer;
+}
+
+.cnf-btn button:hover{
+    background-color: #8dac8c;
+    transition: 0.3s;
+    box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
+}
+
+.chk-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

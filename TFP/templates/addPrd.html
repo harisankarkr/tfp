@@ -1,0 +1,143 @@
+{% extends 'designer_base.html' %}
+
+{% block title %}
+Add new Product
+{% endblock%}
+
+{% load static %}
+
+{% block content %}
+    
+<form action="">
+    <div class="add-main">
+
+        <table>
+            <tr>
+                <!-- Product name -->
+                <td class="first-td">Product Name</td>
+                <td class="second-td"><input type="text"></td>
+                <!-- image 1 -->
+                <td class="third-td">Image 1</td>
+                <td class="fourth-td"><input type="file" src="" alt=""></td>
+            </tr>
+
+            <tr>
+                <!-- category 1 -->
+                <td class="first-td">Category 1</td>
+                <td class="second-td">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">Men's Topwear</option>
+                        <option value="">Men's Bottomwear</option>
+                        <option value="">Jackets</option>
+                        <option value="">Sweatshirts & Hoodies</option>
+                    </select>
+                </td>
+                <!-- image 2 -->
+                <td class="third-td">Image 2</td>
+                <td class="fourth-td"><input type="file" src="" alt=""></td>
+            </tr>
+
+            <tr>
+                <!-- category 2 -->
+                <td class="first-td">Category 2</td>
+                <td class="second-td">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">T-shirts</option>
+                        <option value="">Casual shirts</option>
+                        <option value="">Formal shirts</option>
+                        <option value="">Jackets</option>
+                        <option value="">Sweatshirts & Hoodies</option>
+                        <option value="">Blazers & Coats</option>
+                    </select>
+                </td>
+                <!-- image 3 -->
+                <td class="third-td">Image 3</td>
+                <td class="fourth-td"><input type="file" src="" alt=""></td>
+            </tr>
+
+            <tr>
+                <!-- price -->
+                <td class="first-td">Price</td>
+                <td class="second-td"><input type="text"></td>
+                <!-- image 4 -->
+                <td class="third-td">Image 4 </td>
+                <td class="fourth-td"><input type="file" src="" alt=""></td>
+            </tr>
+
+        </table>
+
+        <hr>
+        <h5>Specifications</h5>
+        <!-- specifications -->
+        <table>
+            <tr>
+                <td class="first-td">Size & Fit</td>
+                <td class="second">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">Men's Topwear</option>
+                        <option value="">Men's Bottomwear</option>
+                        <option value="">Jackets</option>
+                        <option value="">Sweatshirts & Hoodies</option>
+                    </select>
+                </td>
+                <td class="first-td">Material</td>
+                <td class="second">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">Men's Topwear</option>
+                        <option value="">Men's Bottomwear</option>
+                        <option value="">Jackets</option>
+                        <option value="">Sweatshirts & Hoodies</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="first-td">Care</td>
+                <td class="second">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">Men's Topwear</option>
+                    </select>
+                </td>
+                <td class="first-td">Occasion</td>
+                <td class="second">
+                    <select name="" id="">
+                        <option value="">Select</option>
+                        <option value="">Men's Topwear</option>
+                        <option value="">Men's Bottomwear</option>
+                        <option value="">Jackets</option>
+                        <option value="">Sweatshirts & Hoodies</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+        <h5>Size and Stock</h5>
+
+        <table>
+            <tr>
+                <!-- size and stock -->
+                <td>S</td>
+                <td class="size-input"><input type="text"></td>
+                <td>M</td>
+                <td class="size-input"><input type="text"></td>
+                <td>L</td>
+                <td class="size-input"><input type="text"></td>
+                <td>XL</td>
+                <td class="size-input"><input type="text"></td>
+            </tr>
+        </table>
+
+        <div>
+            <!-- buttons -->
+            <button type="submit" class="add-btn">Submit</button>
+            <button type="reset" class="reset-btn">Reset</button>
+        </div>
+    </div>
+</form>
+ 
+{% endblock %}
