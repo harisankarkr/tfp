@@ -73,7 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TFP.wsgi.application'
 
-
+AUTH_USER_MODEL ='account.User'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
