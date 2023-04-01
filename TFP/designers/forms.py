@@ -1,41 +1,24 @@
 from django import forms
-# from django.contrib.auth.models import User
-from account.models import Designer,User
 
 
-# designer registration
-class DesignerRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from account.models import User, Designer, customer
+
+class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(max_length=60, help_text='Required. Enter a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('email', 'mobile', 'user_name', 'password1', 'password2')
+
+class DesignerRegistrationForm(UserCreationForm):
+    email = forms.EmailField(max_length=30, help_text='Required. Enter a valid email address.')
+    name = forms.CharField(max_length=30, required=True)
+    phone = forms.CharField(max_length=15, required=True)
+    bio = forms.CharField(widget=forms.Textarea)
+    logo = forms.ImageField(required=True)
 
     class Meta:
         model = Designer
-        fields = ['name', 'email', 'phone', 'bio', 'logo']
-
-    def clean_confirm_password(self):
-        password = self.cleaned_data.get('password')
-        confirm_password = self.cleaned_data.get('confirm_password')
-        if password and confirm_password and password != confirm_password:
-            raise forms.ValidationError("Passwords don't match")
-        return confirm_password
-
-    def save(self, commit=True):
-        designer = super().save(commit=False)
-        designer.user = User.objects.create_designer(
-            user_name=self.cleaned_data['name'],
-            email=self.cleaned_data['email'],
-            mobile=self.cleaned_data['phone'],
-            password=self.cleaned_data['password']
-        )
-        if commit:
-            designer.save()
-        return designer
-
-
-# designer login
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-
-class DesignerLoginForm(AuthenticationForm):
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}))
-    password = forms.CharField(widget=forms.PasswordInput)
+        fields = ('email', 'phone', 'password1', 'password2', 'name', 'bio', 'logo')

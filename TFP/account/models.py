@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, username, mobile, email, password=None):
+    def create_user(self, user_name, mobile, email, password=None):
         if not email:
             raise ValueError("User must have an email address")
         if not mobile:
@@ -12,7 +12,7 @@ class MyAccountManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             mobile=mobile,
-            username=username,
+            user_name=user_name,
         )
         user.is_varified = False
         user.set_password(password)
@@ -34,7 +34,7 @@ class MyAccountManager(BaseUserManager):
             user = user,
             name = user.user_name,
             email = user.email,
-            mobile = user.mobile
+            phone = user.mobile
         )
         user.save(using=self._db)
         return user
@@ -98,6 +98,10 @@ class Designer(models.Model):
     phone = models.CharField(max_length=15,unique=True)
     bio = models.TextField()
     logo = models.ImageField(upload_to='designer/logo')
+
+    
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ['name', 'phone', 'bio', 'logo']
 
     def __str__(self):
         return self.name
