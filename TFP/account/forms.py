@@ -10,14 +10,16 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'mobile', 'user_name', 'password1', 'password2', 'is_designer')
+        fields = ('email', 'mobile', 'username', 'password1', 'password2', 'is_designer')
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
         user.is_designer = self.cleaned_data['is_designer']
-        if commit:
-            user.save()
+        print(user)
+        # if commit:
+        #     user.save()
         if user.is_designer:
+            print(user.is_designer)
             designer = Designer.objects.create(
                 user=user, 
                 name = user.username,

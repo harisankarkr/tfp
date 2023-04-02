@@ -7,6 +7,7 @@ from account.forms import UserRegistrationForm
 
 def registration(request):
     if request.method == 'POST':
+        print(request.POST)
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -16,7 +17,7 @@ def registration(request):
     else:
         form = UserRegistrationForm()
 
-    return render(request,'customerReg.html',{'form':form})
+    return render(request,'index.html',{'form':form})
 
 # index | login view
 def index_login_view(request):
