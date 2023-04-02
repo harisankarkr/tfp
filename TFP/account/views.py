@@ -2,25 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from account.forms import UserRegistrationForm
 from account.models import Designer,CustomerProfile
-# Create your views here.
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import UserLoginForm
 
 
 
-# def registration(request):
-#     if request.method == 'POST':
-#         print(request.POST)
-#         form = UserRegistrationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             messages.success(request, f'Account created for {username}!')
-#             return redirect('login')
-#     else:
-#         form = UserRegistrationForm()
-
-#     return render(request,'index.html',{'form':form})
-
-
+# ===========================================================================================
+# registration
+# ==================
 
 def registration(request):
     if request.method == 'POST':
@@ -47,7 +38,7 @@ def registration(request):
                 )
 
             messages.success(request, f'Account created for {user.username}!')
-            return redirect('login')
+            return redirect('index')
         else:
             # display form validation errors
             messages.error(request, 'Please correct the errors below.')
@@ -55,6 +46,41 @@ def registration(request):
         form = UserRegistrationForm()
 
     return render(request, 'index.html', {'form': form})
+
+# ===========================================================================================
+
+
+
+# ===========================================================================================
+# login
+# ==================
+
+
+def user_login(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Login successful.')
+                if user.is_designer:
+                    return redirect('designer_dashboard')
+                else:
+                    return redirect('customer_dashboard')
+            else:
+                messages.error(request, 'Invalid username or password.')
+    else:
+        form = UserLoginForm()
+
+    return render(request, 'index.html', {'form': form})
+
+
+# ===========================================================================================
+
 
 
 # index | login view

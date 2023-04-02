@@ -1,6 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from account.models import User, Designer, CustomerProfile
+from django.contrib.auth.forms import AuthenticationForm
+
+
+
+# registraion form -----------------------------------------------------------------------------------
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60, help_text='Required. Enter a valid email address.')
@@ -12,24 +17,9 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('email', 'mobile', 'username', 'password1', 'password2', 'is_designer')
 
-    # def save(self, commit=True):
-    #     user = super(UserRegistrationForm, self).save(commit=False)
-    #     user.email = self.cleaned_data['email']
-    #     user.mobile = self.cleaned_data['mobile']
-    #     if commit:
-    #         user.save()
-    #     if user.is_designer:
-    #         Designer.objects.create(
-    #             user=user, 
-    #             name=user.username,
-    #             email=user.email, 
-    #             phone=user.mobile
-    #         )
-    #     else:
-    #         CustomerProfile.objects.create(
-    #             user=user, 
-    #             name=user.username,
-    #             email=user.email, 
-    #             phone=user.mobile
-    #         )
-    #     return user
+
+# login form ----------------------------------------------------------------------------------------
+
+class UserLoginForm(forms.Form):
+    username = forms.CharField(max_length=60, help_text='Required. Enter a user name.')
+    password = forms.CharField(widget=forms.PasswordInput)
