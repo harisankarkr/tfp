@@ -2,7 +2,7 @@
 /* ------------------------------------------------------------------------------------------ */
 
 .main{
-  background-image: url('../imges/in1.jpg');
+  background-image: url('../imges/dddd.avif');
   background-size: cover;
   background-position: center;
   width:100%;
@@ -14,13 +14,13 @@
 
 @keyframes slide {
   0% {
-    background-image: url("../imges/in1.jpg");
+    background-image: url("../imges/bggg2.webp");
   }
   33% {
-    background-image: url("../imges/in2.jpg");
+    background-image: url("../imges/regbgg.jpg");
   }
   66% {
-    background-image: url("../imges/in3.jpg");
+    background-image: url("../imges/regbg.webp");
   }
 }
 
@@ -127,10 +127,18 @@
 
 .title-box h1{
   font-size: 85px;
+  color: white;
+  padding: 1rem;
+  border-radius: 25px;
+  background-image: url('../imges/desgbg.jpg');
 }
 
 .title-box h4{
-  color: rgb(95, 95, 95);
+  /* color: rgb(95, 95, 95); */
+  background-image: url('../imges/desgbg.jpg');
+  color: white;
+  border-radius: 25px;
+  padding: 1rem;
   font-size: 25px;
   font-style: italic;
   font-weight: lighter;
