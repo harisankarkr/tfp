@@ -12,27 +12,24 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('email', 'mobile', 'username', 'password1', 'password2', 'is_designer')
 
-    def save(self, commit=True):
-        user = super(UserRegistrationForm, self).save(commit=False)
-        user.is_designer = self.cleaned_data['is_designer']
-        print(user)
-        # if commit:
-        #     user.save()
-        if user.is_designer:
-            print(user.is_designer)
-            designer = Designer.objects.create(
-                user=user, 
-                name = user.username,
-                email=user.email, 
-                phone=user.mobile
-            )
-            designer.save()
-        else:
-            customer = CustomerProfile.objects.create(
-                user=user, 
-                name=user.username,
-                email=user.email, 
-                phone=user.mobile
-            )
-            customer.save()
-        return user
+    # def save(self, commit=True):
+    #     user = super(UserRegistrationForm, self).save(commit=False)
+    #     user.email = self.cleaned_data['email']
+    #     user.mobile = self.cleaned_data['mobile']
+    #     if commit:
+    #         user.save()
+    #     if user.is_designer:
+    #         Designer.objects.create(
+    #             user=user, 
+    #             name=user.username,
+    #             email=user.email, 
+    #             phone=user.mobile
+    #         )
+    #     else:
+    #         CustomerProfile.objects.create(
+    #             user=user, 
+    #             name=user.username,
+    #             email=user.email, 
+    #             phone=user.mobile
+    #         )
+    #     return user
