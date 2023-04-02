@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from account.forms import UserRegistrationForm
 from account.models import Designer,CustomerProfile
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserLoginForm
@@ -47,9 +47,6 @@ def registration(request):
 
     return render(request, 'index.html', {'form': form})
 
-# ===========================================================================================
-
-
 
 # ===========================================================================================
 # login
@@ -81,9 +78,17 @@ def user_login(request):
 
 # ===========================================================================================
 
+# logout
+# =========================
 
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+# =============================================================================================
 
 # index | login view
+# ==========================
 def index_login_view(request):
     return render(request,"index.html",{})
 

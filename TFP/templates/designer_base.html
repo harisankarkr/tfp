@@ -43,7 +43,7 @@
         <div class="dp">
             <img src= "{% static 'imges/skel.jpg' %}" alt="">
         </div>
-        <h2>Designer Name</h2>
+        <h2>{{ designer.name }}</h2>
     </div>
 
     <!-- bio and other details -->
@@ -51,12 +51,12 @@
         <table>
             <tr>
                 <td class="bold">Email</td>
-                <td>Designer@gmail.com</td>
+                <td>{{ designer.email }}</td>
             </tr>
             
             <tr>
                 <td class="bold">Phone</td>
-                <td>9495661377</td>
+                <td>{{ designer.phone }}</td>
             </tr>
             <tr>
                 <td class="bold">Bio</td>
@@ -67,7 +67,7 @@
 
     <!-- edit button -->
     <div class="prf-edit">
-        <a href="{% url 'edit_info' %}"><button title="edit profile" type="submit"><i class="fa-solid fa-pen fa-lg"></i></button></a>
+        <a href="{% url 'edit_info' %}"><button title="edit profile" type="submit">Profile<i class="fa-solid fa-pen fa-lg"></i></button></a>
         
     </div>
 </div>
@@ -78,7 +78,7 @@
     <a href="{% url 'addPrd' %}"><button>Add Products</button></a>
     <a href="{% url 'update' %}"><button>Update Stock</button></a>
     <button>Shipping Requests</button>
-    <button>Sign Out</button>
+    <a href="{% url 'logout_view' %}"><button>Sign Out</button></a>
     <!-- <button>View Business</button> -->
 </div>
 

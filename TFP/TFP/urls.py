@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from account.views import (index_login_view,registration)
+from account.views import (index_login_view, registration, user_login, logout_view)
 from designers.views import (designer_dashboard,add_product,base,update,designer_registration,edit_info)
 from customers.views import (customer_registration)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # index
     path('', index_login_view, name="index"),
     path('designer',designer_dashboard, name='designer_dashboard'),
     path('addPrd',add_product, name='addPrd'),
@@ -29,5 +31,13 @@ urlpatterns = [
     path('register',designer_registration, name='register'),
     path('edit_info',edit_info, name='edit_info'),
     path('customer_registraion',customer_registration, name='customer_registration'),
+
+    # registration
     path('registration',registration, name='registration'),
+
+    # login
+    path('user_login',user_login, name='user_login'),
+
+    # logout
+    path('logout_view', logout_view, name='logout_view'),
 ]

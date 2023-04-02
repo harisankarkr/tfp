@@ -1,12 +1,15 @@
 from pyexpat.errors import messages
 from django.shortcuts import render, redirect
+from account.models import Designer
 
 
 # Create your views here.
 
 # designer dashboard view
 def designer_dashboard(request):
-    return render(request,"designerEdit.html",{})
+    user = request.user
+    designer = Designer.objects.get(user=user)
+    return render(request, "designerEdit.html", {'designer': designer})
 
 # add product view
 def add_product(request):
@@ -31,65 +34,3 @@ def edit_info(request):
 
 
 
-# ---------------------------------------------------------------------------
-
-# from django.contrib.auth import authenticate, login
-# from django.shortcuts import render, redirect
-# from .forms import UserRegistrationForm, DesignerRegistrationForm
-
-# def user_registration_view(request):
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             email = form.cleaned_data.get('email')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(email=email, password=raw_password)
-#             login(request, user)
-#             return redirect('index')
-#     else:
-#         form = UserRegistrationForm()
-#     return render(request, 'registration/user_registration.html', {'form': form})
-
-# def user_login_view(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         user = authenticate(email=email, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             messages.error(request, 'Invalid email or password')
-#     return render(request, 'registration/user_login.html')
-    
-
-# ===============================================================================================
-
-# def designer_registration_view(request):
-#     if request.method == 'POST':
-#         print(request.POST)
-#         form = DesignerRegistrationForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             email = form.cleaned_data.get('email')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(email=email, password=raw_password)
-#             login(request, user)
-#             return redirect('index')
-#     else:
-#         form = DesignerRegistrationForm()
-#     return render(request, 'desigReg.html', {'form': form})
-
-
-# def designer_login_view(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         user = authenticate(email=email, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             messages.error(request, 'Invalid email or password')
-#     return render(request, 'registration/designer_login.html')
