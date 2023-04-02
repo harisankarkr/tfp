@@ -24,6 +24,7 @@ from account.models import Designer,CustomerProfile
 
 def registration(request):
     if request.method == 'POST':
+        print(request.POST)
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)

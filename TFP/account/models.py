@@ -50,7 +50,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_designer = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["mobile", "user_name"]
+    REQUIRED_FIELDS = ["mobile", "username"]
 
     objects = MyAccountManager()
 
