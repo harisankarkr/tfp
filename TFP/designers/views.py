@@ -22,6 +22,7 @@ def update(request):
 
 # designer registration page view
 def designer_registration(request):
+    
     return render(request,'DesigReg.html',{})
 
 # edit basic info of designer(dp and logo)

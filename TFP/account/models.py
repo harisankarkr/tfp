@@ -19,26 +19,6 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    def create_designer(self, user_name, mobile, email, password):
-        user = self.create_user(
-            email=self.normalize_email(email),
-            password=password,
-            mobile=mobile,
-            user_name=user_name,
-        )
-        
-        user.is_active = True
-        user.is_superuser = True
-        user.is_designer = True
-        designer = Designer.objects.create(
-            user = user,
-            name = user.user_name,
-            email = user.email,
-            phone = user.mobile
-        )
-        user.save(using=self._db)
-        return user
-
     def create_superuser(self, user_name, mobile,email, password):
         user = self.create_user(
             email=self.normalize_email(email),
@@ -57,7 +37,7 @@ class MyAccountManager(BaseUserManager):
 
 class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True, blank=False)
-    user_name = models.CharField(max_length=60, unique=False, blank=True)
+    username = models.CharField(max_length=60, unique=False, blank=True)
     mobile = models.CharField(max_length=13, blank=False, unique=True)
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now_add=True)
@@ -98,16 +78,13 @@ class Designer(models.Model):
     phone = models.CharField(max_length=15,unique=True)
     bio = models.TextField()
     logo = models.ImageField(upload_to='designer/logo')
-
-    
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['name', 'phone', 'bio', 'logo']
+   
 
     def __str__(self):
         return self.name
     
 
-class customer(models.Model):
+class CustomerProfile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=155,null=True,blank=True)
     email = models.EmailField(max_length=255, unique=True)
