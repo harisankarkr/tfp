@@ -1,6 +1,7 @@
 from django.db import models
 
-from account.models import Designer
+# from account.models import Designer
+
 
 # Create your models here.
 
@@ -8,7 +9,7 @@ from account.models import Designer
 
 # product table
 class Product(models.Model):
-    designer = models.ForeignKey(Designer, on_delete=models.CASCADE, null=True)
+    designer = models.ForeignKey('account.Designer', on_delete=models.CASCADE, null=True)
     prd_name = models.CharField(max_length=255)
     category1 = models.CharField(max_length=255)
     category2 = models.CharField(max_length=255, blank=True)

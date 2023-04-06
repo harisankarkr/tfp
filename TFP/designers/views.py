@@ -3,13 +3,20 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from designers.forms import ProductForm
 from account.models import Designer
+from designers.models import Product
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .forms import ProductForm
 
 
 # Create your views here.
 
 # designer dashboard view
 def designer_dashboard(request):
-    return render(request, "designerEdit.html", {})
+    user = request.user
+    designer = Designer.objects.get(user=user)
+    return render(request, "designerViewProducts.html", {'designer': designer})
 
 # add product view
 def add_product_view(request):
@@ -70,10 +77,6 @@ def edit_info(request):
 
 # =====================================================================================================
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .models import Designer, Product
-from .forms import ProductForm
 
 @login_required
 def add_product(request):
@@ -94,3 +97,19 @@ def add_product(request):
         form = ProductForm()
 
     return render(request, 'addPrd.html', {'form': form})
+
+
+# =============================================================================================
+# view products
+# --------------------
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Product
+
+@login_required
+def designer_profile(request):
+    designer = request.user.designer  # get the designer object of the logged-in user
+    products = Product.objects.filter(designer=designer)  # get all products with the designer object
+    context = {'designer': designer, 'products': products}
+    return render(request, 'designerViewProducts.html', context)

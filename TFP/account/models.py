@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from designers.models import Product
 
 
 class MyAccountManager(BaseUserManager):
@@ -83,6 +83,9 @@ class Designer(models.Model):
     def __str__(self):
         return self.name
     
+    
+    def get_products(self):
+        return Product.objects.filter(designer=self)
 
 class CustomerProfile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -96,3 +99,4 @@ class CustomerProfile(models.Model):
 
     def __str__(self):
         return self.name
+
