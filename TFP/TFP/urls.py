@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from account.views import (index_login_view, registration, user_login, logout_view)
-from designers.views import (designer_dashboard,add_product,base,update,designer_registration,edit_info)
-from customers.views import (customer_dashboard,userpage1,user_profile)
+from account.views import (index_login_view, registration, user_login, logout_view,)
+from designers.views import (designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
+from customers.views import (customer_dashboard,userpage1,user_profile,)
 
 urlpatterns = [
 
@@ -31,7 +31,9 @@ urlpatterns = [
     path('designer',designer_dashboard, name='designer_dashboard'),
 
     # add new product
-    path('addPrd',add_product, name='addPrd'),
+    path('addPrd',add_product_view, name='addPrd'),
+    # add new product function
+    path('add_product',add_product, name='add_product'),
 
     # designer base
     path('base',base),

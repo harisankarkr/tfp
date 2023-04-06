@@ -8,62 +8,59 @@ Add new Product
 
 {% block content %}
     
-<form action="">
+<form action="{% url 'add_product' %}"  method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+
     <div class="add-main">
 
         <table>
             <tr>
                 <!-- Product name -->
-                <td class="first-td">Product Name</td>
-                <td class="second-td"><input type="text"></td>
+                <td class="first-td"><label for="prd_name">Product Name</label></td>
+                <td class="second-td">{{ form.prd_name }}</td>
                 <!-- image 1 -->
                 <td class="third-td">Image 1</td>
-                <td class="fourth-td"><input type="file" src="" alt=""></td>
+                <td class="fourth-td">{{ form.image1 }}</td>
             </tr>
 
             <tr>
                 <!-- category 1 -->
                 <td class="first-td">Category 1</td>
                 <td class="second-td">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">Men's Topwear</option>
-                        <option value="">Men's Bottomwear</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
+                    <select name="category1" id="category1" value="{{ form.category1 }}" onchange="populateCategory2()">
+                        <option value="">Select a category</option>
+                        <option value="Men's Topwear">Men's Topwear</option>
+                        <option value="Men's Bottomwear">Men's Bottomwear</option>
+                        <option value="Women's Fusion Wear">Women's Fusion Wear</option>
+                        <option value="Women's Ethnic Wear">Women's Ethnic Wear</option>
                     </select>
                 </td>
                 <!-- image 2 -->
                 <td class="third-td">Image 2</td>
-                <td class="fourth-td"><input type="file" src="" alt=""></td>
+                <td class="fourth-td">{{ form.image2 }}</td>
             </tr>
 
             <tr>
                 <!-- category 2 -->
                 <td class="first-td">Category 2</td>
                 <td class="second-td">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">T-shirts</option>
-                        <option value="">Casual shirts</option>
-                        <option value="">Formal shirts</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
-                        <option value="">Blazers & Coats</option>
+                    <select name="category2" id="category2" value="{{ form.category2 }}">
+                        <option value=""></option>
                     </select>
                 </td>
                 <!-- image 3 -->
                 <td class="third-td">Image 3</td>
-                <td class="fourth-td"><input type="file" src="" alt=""></td>
+                <td class="fourth-td">{{ form.image3 }}</td>
             </tr>
 
             <tr>
                 <!-- price -->
                 <td class="first-td">Price</td>
-                <td class="second-td"><input type="text"></td>
+                <td class="second-td">{{ form.price }}</td>
                 <!-- image 4 -->
                 <td class="third-td">Image 4 </td>
-                <td class="fourth-td"><input type="file" src="" alt=""></td>
+                <td class="fourth-td">{{ form.image4 }}</td>
             </tr>
 
         </table>
@@ -75,41 +72,41 @@ Add new Product
             <tr>
                 <td class="first-td">Size & Fit</td>
                 <td class="second">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">Men's Topwear</option>
-                        <option value="">Men's Bottomwear</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
+                    <select name="fit" id="" value="{{ form.fit }}">
+                        <option value="Classic Fit">Classic Fit</option>
+                        <option value="Slim Fit">Slim Fit</option>
+                        <option value="Regular Fit">Regular Fit</option>
+                        <option value="Skin Fit">Skin Fit</option>
                     </select>
                 </td>
                 <td class="first-td">Material</td>
                 <td class="second">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">Men's Topwear</option>
-                        <option value="">Men's Bottomwear</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
+                    <select name="material" id="" value="{{ form.material }}">
+                        <option value="Cotton">Cotton</option>
+                        <option value="Silk">Silk</option>
+                        <option value="Linen">Linen</option>
+                        <option value="Polyester">Polyester</option>
+                        <option value="Nylon">Nylon</option>
+                        <option value="Denim">Denim</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td class="first-td">Care</td>
                 <td class="second">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">Men's Topwear</option>
+                    <select name="care" id="" value="{{ form.care }}">
+                        <option value="Machine Wash">Machine Wash</option>
+                        <option value="Normal Wash">Normal Wash</option>
                     </select>
                 </td>
                 <td class="first-td">Occasion</td>
                 <td class="second">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">Men's Topwear</option>
-                        <option value="">Men's Bottomwear</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
+                    <select name="occasion" id="" value="{{ form.occasion }}">
+                        <option value="Classic">Classic</option>
+                        <option value="Formal">Formal</option>
+                        <option value="Ethnic">Ethnic</option>
+                        <option value="Casual">Casual</option>
+                        <option value="Sporty">Sporty</option>
                     </select>
                 </td>
             </tr>
@@ -122,13 +119,13 @@ Add new Product
             <tr>
                 <!-- size and stock -->
                 <td>S</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input"><input type="text" name="small"></td>
                 <td>M</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input"><input type="text" name="medium"></td>
                 <td>L</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input"><input type="text" name="large"></td>
                 <td>XL</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input"><input type="text" name="extra_large"></td>
             </tr>
         </table>
 
@@ -140,4 +137,53 @@ Add new Product
     </div>
 </form>
  
+{% if form.errors %}
+<div class="alert alert-danger">
+  <strong>Form errors:</strong>
+  <ul>
+    {% for field in form %}
+      {% if field.errors %}
+        <li>{{ field.label }}:
+          <ul>
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<script>
+    function populateCategory2() {
+        var category1Select = document.getElementById("category1");
+        var category2Select = document.getElementById("category2");
+        var selectedCategory1 = category1Select.options[category1Select.selectedIndex].value;
+    
+        // Clear the existing options
+        category2Select.innerHTML = "";
+    
+        if (selectedCategory1 === "Men's Topwear") {
+            var category2Options = ["T-shirts", "Casual shirts", "Formal shirts", "Jackets", "Sweatshirts & Hoodies", "Blazers & Coats"];
+        } else if (selectedCategory1 === "Men's Bottomwear") {
+            var category2Options = ["Jeans", "Casual Trousers", "Formal Trousers", "Shorts & 3/4ths", "Track pants & Joggers"];
+        } else if (selectedCategory1 === "Women's Fusion Wear") {
+            var category2Options = ["Gowns", "Pants & Shorts", "Jackets & Shrugs", "Tops", "Shirts & T-shirts", "Jeans"];
+        } else if (selectedCategory1 === "Women's Ethnic Wear") {
+            var category2Options = ["Kurthas", "Salwars & Churidars", "Skirts & Ghagras", "Sarees", "Dress materials", "Dupattas"];
+        } else {
+            var category2Options = [""];
+        }
+    
+        // Add the new options
+        for (var i = 0; i < category2Options.length; i++) {
+            var option = document.createElement("option");
+            option.text = category2Options[i];
+            category2Select.add(option);
+        }
+    }
+    </script>
+
 {% endblock %}

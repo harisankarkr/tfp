@@ -192,19 +192,11 @@ button[type="submit"]:hover {
 <div class="register-container">
   <div class="register-form-container">
 
+  
     <form class="register-form" action="{% url 'registration' %}" method="POST">
       <!-- <h2>Registration</h2> -->
       {% csrf_token %}
-      {% if form.errors %}
-        <div class="error-message">
-          {% for field in form %}
-            {% for error in field.errors %}
-              <p>{{ error }}</p>
-            {% endfor %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
+      {{ form.as_p }}
       <div class="form-group">
         <label for="username">Username<span class="required">*</span></label>
         <input type="text" name="username" required=True id="username" value="{{ form.username.value }}">
@@ -241,5 +233,21 @@ button[type="submit"]:hover {
     </form>
   </div>
 </div>
+
+
+{% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p>{{ field.label }}: {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+
+
 </body>
 
