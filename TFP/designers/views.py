@@ -7,7 +7,7 @@ from designers.models import Product
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import ProductForm
+from .forms import DesignerProfileForm, ProductForm
 
 
 # Create your views here.
@@ -21,6 +21,10 @@ def designer_dashboard(request):
 # add product view
 def add_product_view(request):
     return render(request,'addPrd.html',{})
+
+# delete product view
+def delete_product_view(request):
+    return render(request,'delete_product.html',{})
 
 # base html
 def base(request):
@@ -113,3 +117,47 @@ def designer_profile(request):
     products = Product.objects.filter(designer=designer)  # get all products with the designer object
     context = {'designer': designer, 'products': products}
     return render(request, 'designerViewProducts.html', context)
+
+
+# ==================================================================================================
+# edit designer profile
+# ===========================
+
+
+def edit_designer_profile(request):
+    designer = Designer.objects.get(user=request.user)
+    # designer = request.user.designer # retrieve the designer object
+    if request.method == 'POST':
+        print(request.POST)
+        form = DesignerProfileForm(request.POST, request.FILES, instance=designer)
+        if form.is_valid():
+            form.save() # save the updated form data to the designer object
+            return redirect('designer_dashboard') # redirect to the designer's profile page
+    else:
+        form = DesignerProfileForm(instance=designer) # pre-populate the form with the current designer's information
+    return render(request, 'editInfo.html', {'form': form})
+
+
+# =======================================================================================================
+# product delete
+# =====================
+
+# from django.shortcuts import get_object_or_404, redirect
+
+# def delete_product(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+#     if request.method == 'POST':
+#         product.delete()
+#         return redirect('delete_product_view')
+#     return render(request, 'delete_product.html', {'product': product})
+
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        product.delete()
+        messages.success(request, 'Product deleted successfully.')
+        return redirect('designer_dashboard')
+    return render(request, 'delete_product.html', {'product': product})

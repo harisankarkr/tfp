@@ -9,21 +9,21 @@ Update Stock
 {% block content %}
 
     
-<form action="">
-
-    <div class="add-main">
+<form action="edit_designer_profile" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="edinfo">
 
         <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Logo/Dp</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" id="inputPassword3">
+              <input type="file" name="logo" class="form-control" id="inputPassword3">
             </div>
           </div>
   
-          <div class="row mb-6">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Bio</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPassword3">
+          <div class="row mb-3">
+            <label for="" class="">Bio</label>
+            <div class="">
+              <input type="textarea" rows="5" cols="10" name="bio" class="" id="bio">
             </div>
           </div>
 

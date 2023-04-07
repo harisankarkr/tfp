@@ -13,11 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from account.views import (index_login_view, registration, user_login, logout_view,)
-from designers.views import (designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
+from designers.views import (delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
 from customers.views import (customer_dashboard,userpage1,user_profile,)
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -34,6 +37,10 @@ urlpatterns = [
     path('addPrd',add_product_view, name='addPrd'),
     # add new product function
     path('add_product',add_product, name='add_product'),
+    # add new product
+    path('delete_product_view',delete_product_view, name='delete_product_view'),
+    # delete product function
+    path('product/<int:pk>/delete/', delete_product, name='delete_product'),
 
     # designer base
     path('base',base),
@@ -46,6 +53,8 @@ urlpatterns = [
 
     # edit profile - designer
     path('edit_info',edit_info, name='edit_info'),
+    # edit designer profile - function
+    path('edit_designer_profile',edit_designer_profile, name="edit_designer_profile"),
 
     # registration
     path('registration',registration, name='registration'),
@@ -64,4 +73,5 @@ urlpatterns = [
 
     # customer user page 1
     path('user_profile',user_profile, name='user_profile'),
-]
+
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

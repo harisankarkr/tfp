@@ -6,9 +6,10 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 30rem;
+    height: 33rem;
     align-items: center;
     justify-content: space-around;
+    padding: 2rem 0 2rem 0;
 }
 
 .sec-1{
@@ -16,20 +17,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 20%;
+    width: 30%;
     /* background-color: aqua; */
 }
 
 .sec-1 > img{
     width: 8rem;
-    height: auto;
+    height: 9rem;
     margin-top: .5rem ;
     cursor: pointer;
-    object-fit:cover;
+    object-fit: fill;
 }
 
 .sec-1 > img:hover{
-    width: 9rem;
+    width: 8.5rem;
+    object-fit: contain;
     transition: 0.3s;
     box-shadow: 3.5px 7.0px 7.0px hsl(0deg 0% 0% / 0.39);
 }
@@ -39,16 +41,18 @@
     align-items: center;
     justify-content: center;
     width: 40%;
+    height: 25rem;
     /* background-color: aquamarine; */
 }
 
 .sec-2 img{
-    width :80%;
-    height: auto;
+    width :100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .sec-3{
-    width:40%;
+    width:30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

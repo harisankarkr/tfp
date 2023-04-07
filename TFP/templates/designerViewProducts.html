@@ -8,6 +8,15 @@
 
 {% block content %}
 
+{% if messages %}
+    <div class="messages" >
+        {% for message in messages %}
+            <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
 {% if designer.get_products %}
 <!-- ḍesigner products -->
     {% for product in designer.get_products %}
@@ -21,9 +30,9 @@
 
         <!-- sub img sec -->
         <div class="sec-1">
-            <img src="{% static 'imges/skel.jpg' %}" alt="">
-            <img src="{% static 'imges/skel.jpg' %}" alt="">
-            <img src="{% static 'imges/skel.jpg' %}" alt="">
+            <img src="{{ product.image2.url }}" alt="{{ product.prd_name }}">
+            <img src="{{ product.image3.url }}" alt="{{ product.prd_name }}">
+            <img src="{{ product.image4.url }}" alt="{{ product.prd_name }}">
         </div>
     
     <!-- desginer/product details -->
@@ -32,24 +41,70 @@
             <!-- prd det -->
             <h3>{{ product.prd_name }}</h3>
             <p>
-        <p>Category: {{ product.category1 }} {% if product.category2 %} > {{ product.category2 }}{% endif %}</p>
-        <p>Fit: {{ product.fit }}</p>
-        <p>Care: {{ product.care }}</p>
-        <p>Material: {{ product.material }}</p>
-        <p>Occasion: {{ product.occasion }}</p>                
+        <p>Category : {{ product.category1 }} {% if product.category2 %} > {{ product.category2 }}{% endif %}</p>           
             </p>
+            <!-- spec table -->
+            <table>
+                <tr>
+                    <td class="sp-tt">Size & Fit</td>
+                    <td class="sp-td">{{ product.fit }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Material</td>
+                    <td class="sp-td">{{ product.material }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Care</td>
+                    <td class="sp-td">{{ product.care }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Occasion</td>
+                    <td class="sp-td">{{ product.occasion }}</td>
+                </tr>
+            </table>
+
+            <hr>
+            
+            <!-- stock table -->
+            <table>
+                <tr>
+                    <th>S</th>
+                    <th>M</th>
+                    <th>L</th>
+                    <th>XL</th>
+                </tr>
+                <tr>
+                    <td>{{ product.small }}</td>
+                    <td>{{ product.medium }}</td>
+                    <td>{{ product.large }}</td>
+                    <td>{{ product.extra_large }}</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <div style="display: flex; flex-direction: row;">
 
             <!-- price -->
-            <h3 id="pr">&#x20b9; {{ product.price }}</h3>
+            <h3 id="pr" style="padding-right: 1rem;">&#x20b9; {{ product.price }}</h3>
+
+            <!-- remove btn -->
+            <form method="post" action="{% url 'delete_product' product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger btn-sm">remove product</button>
+            </form>
+
+            </div>
         </div>
     </div>
 </div>
 
-        
+<hr>
 
     {% endfor %}
 {% else %}
-  <p>No products found.</p>
+<br>
+  <h3 style="text-align: center;">No products found.</h3>
 {% endif %}
 
 

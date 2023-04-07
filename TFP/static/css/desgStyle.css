@@ -225,3 +225,16 @@
 .second select{
     width: 16rem;
 }
+
+/* bio */
+#bio{
+    border: 2px solid black;
+    width: 100%;
+}
+
+.edinfo{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 1rem 0 3rem 0;
+}
