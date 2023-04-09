@@ -1,7 +1,7 @@
 {% extends 'designer_base.html' %}
 
 {% block title %}
- View Products
+ TFP | Designer Profile
 {% endblock%}
 
 {% load static %}
@@ -11,7 +11,7 @@
 {% if messages %}
     <div class="messages" >
         {% for message in messages %}
-            <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            <p style="text-align: center; color: green;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
         {% endfor %}
     </div>
 {% endif %}
@@ -25,15 +25,17 @@
 <div class="prd-det">
     <!-- main img sec-->
     <div class="sec-2">
-        <img src="{{ product.image1.url }}" alt="{{ product.prd_name }}">
+        <img id="mainImage{{product.pk}}" src="{{ product.image1.url }}" alt="{{ product.prd_name }}">
     </div>
-
-        <!-- sub img sec -->
-        <div class="sec-1">
-            <img src="{{ product.image2.url }}" alt="{{ product.prd_name }}">
-            <img src="{{ product.image3.url }}" alt="{{ product.prd_name }}">
-            <img src="{{ product.image4.url }}" alt="{{ product.prd_name }}">
-        </div>
+    
+    <!-- sub img sec -->
+    <div class="sec-1">
+        <img src="{{ product.image1.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+        <img src="{{ product.image2.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+        <img src="{{ product.image3.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+        <img src="{{ product.image4.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+    </div>
+    
     
     <!-- desginer/product details -->
     <div class="sec-3">
@@ -64,6 +66,11 @@
             </table>
 
             <hr>
+
+                        <!-- price -->
+                        <h3 id="pr" style="padding-right: 1rem;">Price : &#x20b9; {{ product.price }}</h3>
+
+            <hr>
             
             <!-- stock table -->
             <table>
@@ -83,16 +90,29 @@
 
             <hr>
 
-            <div style="display: flex; flex-direction: row;">
-
-            <!-- price -->
-            <h3 id="pr" style="padding-right: 1rem;">&#x20b9; {{ product.price }}</h3>
+            <div style="display: flex; flex-direction: row; justify-content: space-around;">
 
             <!-- remove btn -->
-            <form method="post" action="{% url 'delete_product' product.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline-danger btn-sm">remove product</button>
-            </form>
+            <script>
+                function confirmDelete() {
+                  var result = confirm("Are you sure you want to delete this product?");
+                  if (result) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }
+            </script>
+                
+                <form method="post" action="{% url 'delete_product' product.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirmDelete();">remove product</button>
+                </form>
+                
+            <!-- update stock btn -->
+
+  <a href="{% url 'update' pk=product.pk %}" class="btn btn-outline-success btn-sm">Update Stock</a>
+
 
             </div>
         </div>
@@ -100,6 +120,7 @@
 </div>
 
 <hr>
+
 
     {% endfor %}
 {% else %}

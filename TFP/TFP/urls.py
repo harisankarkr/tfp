@@ -18,7 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from account.views import (index_login_view, registration, user_login, logout_view,)
-from designers.views import (delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
+from designers.views import (update_stock,delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
 from customers.views import (customer_dashboard,userpage1,user_profile,)
 from django.conf.urls.static import static
 
@@ -47,6 +47,10 @@ urlpatterns = [
 
     # update product stock 
     path('update',update, name='update'),
+    # udate product stock funstion
+    #    path('<int:pk>/update_stock/', update_stock, name='update_stock'),
+       path('update/<int:pk>/', update_stock, name='update'),
+
 
     # unwanted
     path('register',designer_registration, name='register'),

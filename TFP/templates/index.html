@@ -53,7 +53,15 @@
                 <input type="text" name="username" id="DesigEmail" placeholder="email">
                 <input type="password" name="password" id="DesigPswd" placeholder="password">
 
-                <div id="errMsg"></div>
+                <div id="errMsg">
+                    {% if messages %}
+                    <div class="messages" >
+                        {% for message in messages %}
+                            <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
 
                 <button type="submit">Sign in</button>
 

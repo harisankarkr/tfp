@@ -8,8 +8,6 @@ Update Stock
 
 {% block content %}
 
-    
-<form action="">
 
     <div class="add-main">
 
@@ -17,81 +15,77 @@ Update Stock
         <table>
 
             <tr>
-                <!-- category 2 -->
+                <!-- prd name -->
+                <td class="first-td">Product Name</td>
+                <td class="second-td">{{ product.prd_name }}</td>
+            </tr>
+
+            <tr>
+                <!-- category 1 -->
                 <td class="first-td">Category 1</td>
-                <td class="second-td">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">T-shirts</option>
-                        <option value="">Casual shirts</option>
-                        <option value="">Formal shirts</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
-                        <option value="">Blazers & Coats</option>
-                    </select>
-                </td>
+                <td class="second-td">{{ product.category1 }}</td>
             </tr>
 
             <tr>
                 <!-- category 2 -->
                 <td class="first-td">Category 2</td>
-                <td class="second-td">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">T-shirts</option>
-                        <option value="">Casual shirts</option>
-                        <option value="">Formal shirts</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
-                        <option value="">Blazers & Coats</option>
-                    </select>
-                </td>
+                <td class="second-td">{{ product.category2 }}</td>
             </tr>
 
-
-            <tr>
-                <!-- category 2 -->
-                <td class="first-td">Product Name</td>
-                <td class="second-td">
-                    <select name="" id="">
-                        <option value="">Select</option>
-                        <option value="">T-shirts</option>
-                        <option value="">Casual shirts</option>
-                        <option value="">Formal shirts</option>
-                        <option value="">Jackets</option>
-                        <option value="">Sweatshirts & Hoodies</option>
-                        <option value="">Blazers & Coats</option>
-                    </select>
-                </td>
-            </tr>
         </table>
 
-        <button type="" class="add-btn">current stock</button>
+        <hr>
+
+        <!-- <h5>Current Stock</h5>
+        <table>
+            <tr>
+                <td>S</td>
+                <td class="size-input">{{ product.small }}</td>
+                <td>M</td>
+                <td class="size-input">{{ product.medium }}</td>
+                <td>L</td>
+                <td class="size-input">{{ product.large }}</td>
+                <td>XL</td>
+                <td class="size-input">{{ product.extra_large }}</td>
+            </tr>
+        </table> -->
 
         <hr>
-        <h5>Size and Stock</h5>
+
+        
+      <form method="POST">
+        {% csrf_token %}
+
+        <h5>Update and Stock</h5>
 
         <table>
             <tr>
                 <!-- size and stock -->
                 <td>S</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input">
+                    <input type="number" id="small" name="small" value="{{ product.small }}" class="form-control">
+                </td>
                 <td>M</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input">
+                    <input type="number" id="medium" name="medium" value="{{ product.medium }}" class="form-control">
+                </td>
                 <td>L</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input">
+                    <input type="number" id="large" name="large" value="{{ product.large }}" class="form-control">
+                </td>
                 <td>XL</td>
-                <td class="size-input"><input type="text"></td>
+                <td class="size-input">
+                    <input type="number" id="extra_large" name="extra_large" value="{{ product.extra_large }}" class="form-control">
+                </td>
             </tr>
         </table>
 
         <div>
             <!-- buttons -->
             <button type="submit" class="add-btn">Submit</button>
-            <button type="reset" class="reset-btn">Reset</button>
         </div>
     </div>
 
-</form>
- 
-{% endblock %}
+      </form>
+    {% endblock %}
+    

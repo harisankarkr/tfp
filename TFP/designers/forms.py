@@ -13,3 +13,9 @@ class DesignerProfileForm(forms.ModelForm):
     class Meta:
         model = Designer
         fields = ('bio', 'logo')
+
+# update stock
+class StockForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['small', 'medium', 'large', 'extra_large']

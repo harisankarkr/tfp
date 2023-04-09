@@ -1,7 +1,7 @@
 {% extends 'designer_base.html' %}
 
 {% block title %}
-Add new Product
+Add New Product
 {% endblock%}
 
 {% load static %}
@@ -156,34 +156,5 @@ Add new Product
 </div>
 {% endif %}
 
-<script>
-    function populateCategory2() {
-        var category1Select = document.getElementById("category1");
-        var category2Select = document.getElementById("category2");
-        var selectedCategory1 = category1Select.options[category1Select.selectedIndex].value;
-    
-        // Clear the existing options
-        category2Select.innerHTML = "";
-    
-        if (selectedCategory1 === "Men's Topwear") {
-            var category2Options = ["T-shirts", "Casual shirts", "Formal shirts", "Jackets", "Sweatshirts & Hoodies", "Blazers & Coats"];
-        } else if (selectedCategory1 === "Men's Bottomwear") {
-            var category2Options = ["Jeans", "Casual Trousers", "Formal Trousers", "Shorts & 3/4ths", "Track pants & Joggers"];
-        } else if (selectedCategory1 === "Women's Fusion Wear") {
-            var category2Options = ["Gowns", "Pants & Shorts", "Jackets & Shrugs", "Tops", "Shirts & T-shirts", "Jeans"];
-        } else if (selectedCategory1 === "Women's Ethnic Wear") {
-            var category2Options = ["Kurthas", "Salwars & Churidars", "Skirts & Ghagras", "Sarees", "Dress materials", "Dupattas"];
-        } else {
-            var category2Options = [""];
-        }
-    
-        // Add the new options
-        for (var i = 0; i < category2Options.length; i++) {
-            var option = document.createElement("option");
-            option.text = category2Options[i];
-            category2Select.add(option);
-        }
-    }
-    </script>
 
 {% endblock %}

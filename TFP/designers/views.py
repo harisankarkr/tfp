@@ -7,7 +7,7 @@ from designers.models import Product
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import DesignerProfileForm, ProductForm
+from .forms import DesignerProfileForm, ProductForm, StockForm
 
 
 # Create your views here.
@@ -96,6 +96,7 @@ def add_product(request):
             product.designer = designer
             product.save()
             form.save_m2m()
+            messages.success(request, 'Product added successfully.')
             return redirect('designer_dashboard')
     else:
         form = ProductForm()
@@ -161,3 +162,25 @@ def delete_product(request, pk):
         messages.success(request, 'Product deleted successfully.')
         return redirect('designer_dashboard')
     return render(request, 'delete_product.html', {'product': product})
+
+
+# ====================================================================================================
+# update stock
+# ============================
+
+def update_stock(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        form = StockForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Stock updated successfully.')
+            return redirect('designer_dashboard')
+        else:
+            messages.error(request, 'Error updating stock.')
+    else:
+        form = StockForm(instance=product)
+
+    context = {'product': product, 'form': form}
+    return render(request, 'stockMan.html', context)
+

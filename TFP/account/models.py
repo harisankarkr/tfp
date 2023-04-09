@@ -76,8 +76,8 @@ class Designer(models.Model):
     name = models.CharField(max_length=155,null=True,blank=True)
     email = models.EmailField(max_length=255, unique=True)
     phone = models.CharField(max_length=15,unique=True)
-    bio = models.TextField()
-    logo = models.ImageField(upload_to='media/designer/logo')
+    bio = models.TextField(max_length=155,null=True,blank=True)
+    logo = models.ImageField(upload_to='media/designer/logo',blank=True,null=True)
    
 
     def __str__(self):
