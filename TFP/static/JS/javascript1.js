@@ -41,6 +41,7 @@ $(document).ready(function(){
 });
 
 // ==============================================================================
+// product delete congfo box
 
 function confirmDelete(form) {
     var result = confirm("Are you sure you want to delete this product?");
@@ -53,6 +54,7 @@ function confirmDelete(form) {
   
 
 // ==============================================================================
+// prd card image change
 
 function changeImage(product_id, img) {
   // Get the source of the clicked image
@@ -66,7 +68,7 @@ function changeImage(product_id, img) {
 }
 
 // ==================================================================================================================
-
+// category 2 drop down
 
     function populateCategory2() {
         var category1Select = document.getElementById("category1");

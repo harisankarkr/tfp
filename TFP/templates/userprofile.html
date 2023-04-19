@@ -35,19 +35,22 @@ User Home | TFP
 
         <div id="view-ad">
             <h4>Address</h4>
-            <p>House No/Name</p>
-            <p>Land Mark</p>
-            <p>City</p>
-            <p>Pin Code</p>
+            <p>{{ customer.house }}</p>
+            <p>{{ customer.landmark }}</p>
+            <p>{{ customer.city }}</p>
+            <p>{{ customer.pincode }}</p>
             <button class="edit-btn" id="ed-ad-btn">Edit Address</button>
         </div>
 
         <div id="edit-ad">
-            <input type="text" placeholder="House No/Name">
-            <input type="text" placeholder="Land Mark">
-            <input type="text" placeholder="City">
-            <input type="text" placeholder="Pin Code">
-            <button class="edit-btn" id="save-ad">Save Changes</button>
+            <form action="edit_customer_address" method="post">
+                {% csrf_token %}
+                <input type="text" name="house" placeholder="House No/Name">
+                <input type="text" name="landmark" placeholder="Land Mark">
+                <input type="text" name="city" placeholder="City">
+                <input type="text" name="pincode" placeholder="Pin Code">
+                <button type="submit" class="edit-btn" id="save-ad">Save Changes</button>
+            </form>
         </div>
     </div>
 

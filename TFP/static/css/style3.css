@@ -169,6 +169,11 @@
     width: 30%;
 }
 
+#edit-ad form{
+    width: 100%;
+    padding: 0;
+}
+
 #edit-ad input{
     border: 0;
     color: black;

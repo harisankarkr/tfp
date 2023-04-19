@@ -212,3 +212,11 @@ dd {
   width: 70%;
   height: auto;
 }
+
+.footer-cust{
+  width: 100%;
+  height: 2rem;
+  text-align: center;
+  background-color: #6f926e;
+  color: white;
+}

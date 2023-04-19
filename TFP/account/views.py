@@ -57,7 +57,7 @@ def user_login(request):
     if request.method == 'POST':
         print(request.POST)
         form = UserLoginForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
@@ -67,7 +67,7 @@ def user_login(request):
                 if user.is_designer:
                     return redirect('designer_dashboard')
                 else:
-                    return redirect('customer_dashboard')
+                    return redirect('userpage1')
             else:
                 messages.error(request, 'Invalid username or password.')
     else:
