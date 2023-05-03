@@ -17,9 +17,11 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+from customers.views import remove_from_wishlist
+from customers.views import (add_to_wishlist, wishlist, cart, men_bottomwear, women_fusion, women_ethnic)
 from account.views import (index_login_view, registration, user_login, logout_view,)
 from designers.views import (update_stock,delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
-from customers.views import (all_products,men_topwear,product_detail,userpage2,customer_dashboard,userpage1,user_profile,edit_customer_address)
+from customers.views import (designer_profile,all_products,men_topwear,product_detail,userpage2,customer_dashboard,userpage1,user_profile,edit_customer_address)
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -75,9 +77,23 @@ urlpatterns = [
     # product detail
     path('product/<int:pk>/',product_detail, name='product_detail'),
 
-    # view men's top wear
-    path('men_topwear', men_topwear , name='men_topwear'),
 
+# ----------------------------------------------------------
+    # view men's topwear
+    path('men_topwear', men_topwear , name='men_topwear'),
+    # view men's bottomwear
+    path('men_bottomwear', men_bottomwear , name='men_bottomwear'),
+    # view women_fusion
+    path('women_fusion', women_fusion , name='women_fusion'),
+    # view women_ethnic
+    path('women_ethnic', women_ethnic , name='women_ethnic'),
+# -----------------------------------------------------------
+
+
+# ----------------------------------------------------------------------------
+    # view designer profile
+     path('designer/<int:pk>/', designer_profile, name='designer_profile'),
+# -----------------------------------------------------------------------------
 
 
 
@@ -96,5 +112,12 @@ urlpatterns = [
     path('edit_customer_address',edit_customer_address, name='edit_customer_address'),
     
 
+    # whishlist (view , add , remove) 
+    path('wishlist', wishlist, name='wishlist'),
+    path('add/<int:product_id>', add_to_wishlist, name='add_to_wishlist'),
+    path('remove/<int:pk>', remove_from_wishlist, name='remove_from_wishlist'),
+
+    # cart
+    path('cart', cart, name='cart'),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

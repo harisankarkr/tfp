@@ -7,7 +7,48 @@ Add New Product
 {% load static %}
 
 {% block content %}
-    
+
+<script>
+ 
+ $(document).ready(function(){
+
+    // Hide all select tags of category2 initially
+$('select[id^="category2_"]').hide();
+
+// Show/hide select tags of category2 based on the selection of category1
+$('#category1').on('change', function() {
+    var selectedCategory = $(this).val();
+
+    if (selectedCategory === "Men's Topwear") {
+        $('select[id="category2_1"]').show();
+        $('select[id="category2_2"]').hide();
+        $('select[id="category2_3"]').hide();
+        $('select[id="category2_4"]').hide();
+    } else if (selectedCategory === "Men's Bottomwear") {
+        $('select[id="category2_1"]').hide();
+        $('select[id="category2_2"]').show();
+        $('select[id="category2_3"]').hide();
+        $('select[id="category2_4"]').hide();
+    } else if (selectedCategory === "Women's Fusion Wear") {
+        $('select[id="category2_1"]').hide();
+        $('select[id="category2_2"]').hide();
+        $('select[id="category2_3"]').show();
+        $('select[id="category2_4"]').hide();
+    } else if (selectedCategory === "Women's Ethnic Wear") {
+        $('select[id="category2_1"]').hide();
+        $('select[id="category2_2"]').hide();
+        $('select[id="category2_3"]').hide();
+        $('select[id="category2_4"]').show();
+    }
+     else {
+        $('select[id^="category2_"]').hide();
+    }
+});
+
+ });
+
+</script>
+
 <form action="{% url 'add_product' %}"  method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- {{ form.as_p }} -->
@@ -28,7 +69,7 @@ Add New Product
                 <!-- category 1 -->
                 <td class="first-td">Category 1</td>
                 <td class="second-td">
-                    <select name="category1" id="category1" value="{{ form.category1 }}" onchange="populateCategory2()">
+                    <select name="category1" id="category1" value="{{ form.category1 }}">
                         <option value="">Select a category</option>
                         <option value="Men's Topwear">Men's Topwear</option>
                         <option value="Men's Bottomwear">Men's Bottomwear</option>
@@ -45,8 +86,36 @@ Add New Product
                 <!-- category 2 -->
                 <td class="first-td">Category 2</td>
                 <td class="second-td">
-                    <select name="category2" id="category2" value="{{ form.category2 }}">
-                        <option value=""></option>
+                    <select name="category2" id="category2_1" value="{{ form.category2 }}">
+                        <option value="T-shirts">T-shirts</option>
+                        <option value="Casual shirts">Casual shirts</option>
+                        <option value="Formal shirts">Formal shirts</option>
+                        <option value="Jackets">Jackets</option>
+                        <option value="Sweatshirts & Hoodies">Sweatshirts & Hoodies</option>
+                        <option value="Blazers & Coats">Blazers & Coats</option>
+                    </select>
+                    <select name="category2" id="category2_2" value="{{ form.category2 }}">
+                        <option value="Jeans">Jeans</option>
+                        <option value="Casual Trousers">Casual Trousers</option>
+                        <option value="Formal Trousers">Formal Trousers</option>
+                        <option value="Shorts & 3/4ths">Shorts & 3/4ths</option>
+                        <option value="Track pants & Joggers">Track pants & Joggers</option>
+                    </select>
+                    <select name="category2" id="category2_3" value="{{ form.category2 }}">
+                        <option value="Gowns">Gowns</option>
+                        <option value="Pants & Shorts">Pants & Shorts</option>
+                        <option value="Jackets & Shrugs">Jackets & Shrugs</option>
+                        <option value="Tops">Tops</option>
+                        <option value="Shirts & T-shirts">Shirts & T-shirts</option>
+                        <option value="Jeans">Jeans</option>
+                    </select>
+                    <select name="category2" id="category2_4" value="{{ form.category2 }}">
+                        <option value="Kurthas">Kurthas</option>
+                        <option value="Salwars & Churidars">Salwars & Churidars</option>
+                        <option value="Skirts & Ghagras">Skirts & Ghagras</option>
+                        <option value="Sarees">Sarees</option>
+                        <option value="Dress materials">Dress materials</option>
+                        <option value="Dupattas">Dupattas</option>
                     </select>
                 </td>
                 <!-- image 3 -->

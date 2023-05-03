@@ -36,6 +36,11 @@
     padding: 0 .5rem 0 .5rem;
 }
 
+.cart-tabel select{
+    width: 3rem;
+    height: auto;
+    border: 0;
+}
 
 .remove-btn{
     border: 0;

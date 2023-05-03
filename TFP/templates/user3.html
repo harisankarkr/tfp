@@ -1,135 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'customer_base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TFP | user-3</title>
+{% block title %}
+User Home | TFP 
+{% endblock%}
 
-    <!-- css -->
-    <!-- style-one -->
-    <link rel="stylesheet" href="css/style1.css">
-    <!-- style-two -->
-    <link rel="stylesheet" href="css/style2.css">
+{% load static %}
 
-    <!-- font awesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% block content %}
 
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-
-</head>
-
-<body>
-
-    
-
-  <!-- nav bar -->
-  <div class="nav">
-
-    <!-- logo -->
-    <div class="logo">
-     <h2> <a href="user1.html"> The Fashoin Project</a></h2>
-    </div>
-
-    <!-- search bar -->
-    <div class="search">
-      <form action="" method="post">
-        <input type="text" class="search-bar" placeholder="search for designers...">
-        <button type="submit" class="search-button"><i class="fa fa-search fa-lg"></i></button>
-      </form>
-    </div>
-
-    <!-- user profile -->
-    <div>
-        <a href="userprofile.html" class="user-profile"><i title="User Profile" class="fa-regular fa-user fa-lg"></i></a>
-      </div>
-  
-      <!-- whish list -->
-      <div >
-        <a href="whishlist.html" class="whish-list"><i title="whish list" class="fa-regular fa-heart fa-lg"></i></a>
-      </div>
-  
-      <!-- cart -->
-      <div >
-        <a href="cart.html" class="cart"><i title="cart" class="fa-solid fa-bag-shopping fa-lg"></i></a>
-      </div>
-  
-      <!-- logout -->
-      <div >
-        <a href="#" class="logout"><i title="Sign out" class="fa-solid fa-right-from-bracket fa-lg"></i></a>
-      </div>
-
-  </div>
 
   <!-- space -->
   <div class="space">
 
   </div>
-  
+  <div id="errMsg">
+    {% if messages %}
+    <div class="messages" >
+        {% for message in messages %}
+            <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
   <!-------------------------------------------------------------------------------------------------------------- -->
 
     <div class="prd-heading">
-        <h4>Men / Shirt / Proudct name </h4>
+        <h4>{{ product.category1 }} / {{ product.category2 }} / {{ product.prd_name }} </h4>
     </div>
 
     <div class="prd-det">
-        <!-- sub img sec -->
-        <div class="sec-1">
-            <img src="imges/skel.jpg" alt="">
-            <img src="imges/skel.jpg" alt="">
-            <img src="imges/skel.jpg" alt="">
-        </div>
 
-        <!-- main img sec-->
-        <div class="sec-2">
-            <img src="imges/skel.jpg" alt="">
-        </div>
+<!-- sub img sec -->
+<div class="sec-1">
+    <img src="{{ product.image1.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+    <img src="{{ product.image2.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+    <img src="{{ product.image3.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+    <img src="{{ product.image4.url }}" alt="{{ product.prd_name }}" onclick="changeImage('{{ product.pk }}', this)">
+</div>
+
+<!-- main img sec-->
+<div class="sec-2">
+    <img id="mainImage{{product.pk}}" src="{{ product.image1.url }}" alt="{{ product.prd_name }}">
+</div>
 
         <!-- desginer/product details -->
         <div class="sec-3">
 
             <div class="desig-det">
-                <img src="imges/skel.jpg" alt="">
-                <h3> <a href="designerView.html">desginer name</a> </h3>
+                <img src="{{ designer.logo.url }}" alt="">
+                <h3> <a href="{% url 'designer_profile' designer.id %}">{{ designer.name }}</a> </h3>
             </div>
 
             <div>
                 <!-- prd det -->
-                <h3>Product Details</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quis, aperiam mollitia ipsam ratione
-                    qui laboriosam nobis libero, aliquid nulla eaque, corporis ea alias? Architecto impedit fugiat enim
-                    necessitatibus maiores.</p>
+                <h3>{{ product.prd_name }}</h3>
+                <h6>{{ product.category1 }}</h6>
+                <br>
+            <!-- spec table -->
+            <table>
+                <tr>
+                    <td class="sp-tt">Size & Fit</td>
+                    <td class="sp-td">{{ product.fit }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Material</td>
+                    <td class="sp-td">{{ product.material }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Care</td>
+                    <td class="sp-td">{{ product.care }}</td>
+                </tr>
+                <tr>
+                    <td class="sp-tt">Occasion</td>
+                    <td class="sp-td">{{ product.occasion }}</td>
+                </tr>
+            </table>
+
+            <br>
 
                 <!-- size chart -->
-                <div class="size-chart">
+                <!-- <div class="size-chart">
                     <p>select size : </p>
-                    <label for=""><input type="radio" name="" id=""> S</label>
-                    <label for=""><input type="radio" name="" id=""> M</label>
-                    <label for=""><input type="radio" name="" id=""> L</label>
-                    <label for=""><input type="radio" name="" id=""> XL</label>
-                </div>
+                    <label for=""><input type="radio" name="size" id="size-s"> S</label>
+                    <label for=""><input type="radio" name="size" id="size-m"> M</label>
+                    <label for=""><input type="radio" name="size" id="size-l"> L</label>
+                    <label for=""><input type="radio" name="size" id="size-xl"> XL</label>                    
+                </div> -->
+
+                <br>
 
                 <!-- price -->
-                <h3 id="pr">&#x20b9; 799.00 </h3>
+                <h3 id="pr">&#x20b9;{{ product.price }}</h3>
 
             </div>
 
             <div class="btns">
-                <button class="buy-btn">Buy Now</button>
-                <button class="cart-btn">Add to Cart</button>
-                <button title="add to whishlist" class="whish-btn"><i class="fa fa-heart fa-lg"></i></button>
+               
+                <button class="buy-btn"><a href="{% url 'cart' %}">Buy Now</a></button>
+                <!-- <button id="add-to-cart-btn" class="cart-btn"><a href="{% url 'cart' %}">Buy Now</a></button> -->
+                <button title="add to whishlist" class="whish-btn"><a href="{% url 'add_to_wishlist' product_id=product.id %}"><i class="fa fa-heart fa-lg"></i></a></button>
+   
             </div>
         </div>
 
@@ -172,24 +143,24 @@
         <div class="spec">
 
             <!-- spec table -->
-            <table>
+            <!-- <table>
                 <tr>
                     <td class="sp-tt">Size & Fit</td>
-                    <td class="sp-td">Skinny Fit</td>
+                    <td class="sp-td">{{ product.fit }}</td>
                 </tr>
                 <tr>
                     <td class="sp-tt">Material</td>
-                    <td class="sp-td">Cotton</td>
+                    <td class="sp-td">{{ product.material }}</td>
                 </tr>
                 <tr>
                     <td class="sp-tt">Care</td>
-                    <td class="sp-td">Machine Wash</td>
+                    <td class="sp-td">{{ product.care }}</td>
                 </tr>
                 <tr>
                     <td class="sp-tt">Occasion</td>
-                    <td class="sp-td">Casual</td>
+                    <td class="sp-td">{{ product.occasion }}</td>
                 </tr>
-            </table>
+            </table> -->
 
         </div>
 
@@ -200,12 +171,12 @@
 
     <!-- related products -->
 
-    <div class="prd-heading">
+    <!-- <div class="prd-heading">
         <h4>Related Products </h4>
-    </div>
+    </div> -->
 
     <!-- product card - related products -->
-    <div class="rel-box">
+    <!-- <div class="relbox">
 
         <a href="">
             <div class="prd-card">
@@ -248,10 +219,8 @@
         </a>
 
 
-    </div>
+    </div> -->
 
 
 
-</body>
-
-</html>
+    {% endblock%}

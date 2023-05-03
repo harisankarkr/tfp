@@ -48,11 +48,18 @@
 <div class="desig-prof">
     <!-- desig dp -->
     <div class="desig-head">
-        <div class="dp">
-            <img src= "{{ designer.logo.url }}" alt="lll">
-        </div>
+        {% if designer.logo %}
+            <div class="dp">
+                <img src="{{ designer.logo.url }}" alt="lll">
+            </div>
+        {% else %}
+            <div class="dp">
+                <img src="/static/imges/skel.jpg" alt="Default DP">
+            </div>
+        {% endif %}
         <h2>{{ designer.name }}</h2>
     </div>
+    
 
     <!-- bio and other details -->
     <div class="bio">

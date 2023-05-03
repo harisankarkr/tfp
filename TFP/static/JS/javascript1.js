@@ -70,33 +70,55 @@ function changeImage(product_id, img) {
 // ==================================================================================================================
 // category 2 drop down
 
-    function populateCategory2() {
-        var category1Select = document.getElementById("category1");
-        var category2Select = document.getElementById("category2");
-        var selectedCategory1 = category1Select.options[category1Select.selectedIndex].value;
+    // function populateCategory2() {
+    //     var category1Select = document.getElementById("category1");
+    //     var category2Select = document.getElementById("category2");
+    //     var selectedCategory1 = category1Select.options[category1Select.selectedIndex].value;
     
-        // Clear the existing options
-        category2Select.innerHTML = "";
+    //     // Clear the existing options
+    //     category2Select.innerHTML = "";
     
-        if (selectedCategory1 === "Men's Topwear") {
-            var category2Options = ["T-shirts", "Casual shirts", "Formal shirts", "Jackets", "Sweatshirts & Hoodies", "Blazers & Coats"];
-        } else if (selectedCategory1 === "Men's Bottomwear") {
-            var category2Options = ["Jeans", "Casual Trousers", "Formal Trousers", "Shorts & 3/4ths", "Track pants & Joggers"];
-        } else if (selectedCategory1 === "Women's Fusion Wear") {
-            var category2Options = ["Gowns", "Pants & Shorts", "Jackets & Shrugs", "Tops", "Shirts & T-shirts", "Jeans"];
-        } else if (selectedCategory1 === "Women's Ethnic Wear") {
-            var category2Options = ["Kurthas", "Salwars & Churidars", "Skirts & Ghagras", "Sarees", "Dress materials", "Dupattas"];
-        } else {
-            var category2Options = [""];
-        }
+    //     if (selectedCategory1 === "Men's Topwear") {
+    //         var category2Options = ["T-shirts", "Casual shirts", "Formal shirts", "Jackets", "Sweatshirts & Hoodies", "Blazers & Coats"];
+    //     } else if (selectedCategory1 === "Men's Bottomwear") {
+    //         var category2Options = ["Jeans", "Casual Trousers", "Formal Trousers", "Shorts & 3/4ths", "Track pants & Joggers"];
+    //     } else if (selectedCategory1 === "Women's Fusion Wear") {
+    //         var category2Options = ["Gowns", "Pants & Shorts", "Jackets & Shrugs", "Tops", "Shirts & T-shirts", "Jeans"];
+    //     } else if (selectedCategory1 === "Women's Ethnic Wear") {
+    //         var category2Options = ["Kurthas", "Salwars & Churidars", "Skirts & Ghagras", "Sarees", "Dress materials", "Dupattas"];
+    //     } else {
+    //         var category2Options = [""];
+    //     }
     
-        // Add the new options
-        for (var i = 0; i < category2Options.length; i++) {
-            var option = document.createElement("option");
-            option.text = category2Options[i];
-            category2Select.add(option);
-        }
-    }
+    //     // Add the new options
+    //     for (var i = 0; i < category2Options.length; i++) {
+    //         var option = document.createElement("option");
+    //         option.text = category2Options[i];
+    //         category2Select.add(option);
+    //     }
+    // }
 
 
     // ================================================================================================
+
+
+
+    const sizeRadios = document.querySelectorAll('input[name="size"]');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+    function handleSizeSelection() {
+        // Check if a size is selected
+        const selectedSize = document.querySelector('input[name="size"]:checked');
+        if (selectedSize) {
+            // Enable the "Add to Cart" button
+            addToCartBtn.disabled = false;
+        } else {
+            // Disable the "Add to Cart" button
+            addToCartBtn.disabled = true;
+        }
+    }
+
+    // Add event listener to each size radio button
+    sizeRadios.forEach(radio => {
+        radio.addEventListener('change', handleSizeSelection);
+    });

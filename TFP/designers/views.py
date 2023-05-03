@@ -13,10 +13,25 @@ from .forms import DesignerProfileForm, ProductForm, StockForm
 # Create your views here.
 
 # designer dashboard view
+# def designer_dashboard(request):
+#     user = request.user
+#     designer = Designer.objects.get(user=user)
+#     return render(request, "designerViewProducts.html", {'designer': designer})
+
+from .forms import DesignerProfileForm
+
 def designer_dashboard(request):
     user = request.user
     designer = Designer.objects.get(user=user)
-    return render(request, "designerViewProducts.html", {'designer': designer})
+    if request.method == 'POST':
+        form = DesignerProfileForm(request.POST, request.FILES, instance=designer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated!')
+    else:
+        form = DesignerProfileForm(instance=designer)
+    return render(request, 'designerViewProducts.html', {'form': form})
+
 
 # add product view
 def add_product_view(request):
@@ -36,48 +51,12 @@ def update(request):
 
 # designer registration page view
 def designer_registration(request):
-    
     return render(request,'DesigReg.html',{})
 
 # edit basic info of designer(dp and logo)
 def edit_info(request):
     return render(request,'editInfo.html',{})
 
-
-
-# =====================================================================================================
-
-# add product
-# ________________
-
-# from django.contrib.auth.decorators import login_required
-# from django.shortcuts import render, redirect
-
-# @login_required
-# def add_product(request):
-#     if not request.user.is_designer:
-#         return redirect('designer_dashboard') 
-
-#     if request.method == 'POST':
-#         print(request.POST)
-#         form = ProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             print(form.errors)
-#             try:
-#                 product = form.save(commit=False)
-#                 product.designer = request.user
-#                 print(product.designer)
-#                 product.save()
-#                 form.save_m2m()
-#                 print('form not valid')
-#                 return redirect('designer_dashboard', prd_name=product.prd_name, designer=product.designer)
-#             except Exception as e:
-#                 print(e)
-#                 return HttpResponse('Error saving product')
-
-#     else:
-#         form = ProductForm()
-#     return render(request, 'addPrd.html', {'form': form})
 
 # =====================================================================================================
 
@@ -94,6 +73,8 @@ def add_product(request):
         if form.is_valid():
             product = form.save(commit=False)
             product.designer = designer
+            product.category1 = form.cleaned_data['category1']
+            product.category2 = form.cleaned_data['category2']
             product.save()
             form.save_m2m()
             messages.success(request, 'Product added successfully.')

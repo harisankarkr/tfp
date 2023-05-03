@@ -1,0 +1,52 @@
+{% extends 'customer_base.html' %}
+
+{% block title %}
+User Home | TFP 
+{% endblock%}
+
+{% load static %}
+
+
+{% block content %}
+
+  
+  <!-------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="prd-heading">
+        <h4>{{ customer.name }} / Wishlist</h4>
+    </div>
+
+    <!-- messages -->
+<div id="errMsg">
+  {% if messages %}
+  <div class="messages" >
+      {% for message in messages %}
+          <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+<!-- ------------------ -->
+
+{% if empty_wishlist %}
+    <h1 style="margin: 11rem 0 16rem 30rem ;">Your wishlist is empty...</h1>
+{% else %}
+    <!-- display wishlist items here -->
+
+<div class="relbox">
+  {% for product in products %}
+        <form method="get" action="{% url 'product_detail' product.id %}">
+            <a href="{% url 'product_detail' product.id %}">
+              <div class="prd-card">
+                <img src="{{ product.image1.url }}" alt="{{ product.prd_name }}" loading="lazy">
+                <h4>{{ product.prd_name }}</h4>
+                <h6>&#x20b9; {{ product.price }}</h6>
+              </div>
+            </a>
+          <button style="margin-left:5.5rem ;" class="btn btn-outline-danger btn-sm"><a href="{% url 'remove_from_wishlist' pk=product.pk %}">Remove from wishlist</a></button>
+        </form>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+    {% endblock%}

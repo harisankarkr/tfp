@@ -1,4 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+from customers.models import Wishlist
+from account.models import Designer
 from designers.models import Product
 from account.models import CustomerProfile
 from customers.forms import CustAddressForm
@@ -64,17 +67,99 @@ def all_products(request):
 #         return render(request, 'user2.html', {'products': products})
     
 # =====================================================================================================
-# men's topwear
 
+# men's topwear
 def men_topwear(request):
     products = Product.objects.filter(category1="Men's Topwear")
     return render(request, 'user2.html', {'products': products})
 
+# Men's Bottomwear
+def men_bottomwear(request):
+    products = Product.objects.filter(category1="Men's Bottomwear")
+    return render(request, 'user2.html', {'products': products})
+
+# Women's Fusion Wear
+def women_fusion(request):
+    products = Product.objects.filter(category1="Women's Fusion Wear")
+    return render(request, 'user2.html', {'products': products})
+
+# Women's Ethnic Wear
+def women_ethnic(request):
+    products = Product.objects.filter(category1="Women's Ethnic Wear")
+    return render(request, 'user2.html', {'products': products})
+
+
 # =======================================================================================================
 # product detail
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'user3.html', {'product': product})
+# def product_detail(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+#     return render(request, 'user3.html', {'product': product})
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    designer = product.designer
+    return render(request, 'user3.html', {'product': product, 'designer': designer})
+
 
 # =============================================================================================================
+# designer profile view
+
+def designer_profile(request, pk):
+    designer = get_object_or_404(Designer, pk=pk)
+    return render(request, 'designerView.html', {'designer': designer})
+
+
+# =================================================================================================================
+# whish list
+
+# def wishlist(request):
+#     wishlist = get_object_or_404(Wishlist, user=request.user)
+#     products = wishlist.products.all()
+#     return render(request, 'wishlist.html', {'products': products})
+
+# def wishlist(request):
+#     wishlist = get_object_or_404(Wishlist, user=request.user)
+#     products = wishlist.products.all()
+#     customer = CustomerProfile.objects.get(user=request.user)
+#     context = {
+#         'customer': customer,
+#         'products': products,
+#     }
+#     return render(request, 'wishlist.html', context)
+
+def wishlist(request):
+    wishlist = get_object_or_404(Wishlist, user=request.user)
+    products = wishlist.products.all()
+    customer = CustomerProfile.objects.get(user=request.user)
+    context = {
+        'customer': customer,
+        'products': products,
+    }
+    if not products:
+        context['empty_wishlist'] = True
+    return render(request, 'wishlist.html', context)
+
+
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+    wishlist.products.add(product)
+    messages.success(request, f"{product.prd_name} has been added to your wishlist.")
+    return redirect('wishlist')
+
+
+
+def remove_from_wishlist(request, pk):
+    product = Product.objects.get(pk=pk)
+    wishlist = Wishlist.objects.get(user=request.user)
+    wishlist.products.remove(product)
+    messages.success(request, f"{product.prd_name} has been removed from your wishlist.")
+    return redirect('wishlist')
+
+# ==============================================================================================================
+# cart
+# -----------
+
+def cart(request):
+    return render(request,'cart.html')

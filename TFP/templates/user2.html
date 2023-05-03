@@ -59,7 +59,7 @@ User Home | TFP
 
 
 <!-- product cards -->
-<div class="rel-box">
+<div class="relbox">
   {% for product in products %}
         <form method="get" action="{% url 'product_detail' product.id %}">
             <a href="{% url 'product_detail' product.id %}">
@@ -76,4 +76,4 @@ User Home | TFP
 
 
 
-  {% endblock%}
+  {% endblock%}  

@@ -127,12 +127,16 @@ input[type=radio] {
 
 .buy-btn{
     border: 0px;
-    width: 7rem;
+    width: 10rem;
     height: 3rem;
     font-size: large;
     background-color: #6f926e;
     color: white;
     cursor: pointer;
+}
+
+.buy-btn a{
+    color: white;
 }
 
 .buy-btn:hover{
@@ -214,7 +218,7 @@ table {
 
 
 /* product card */
-.rel-box{
+.relbox{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -222,7 +226,7 @@ table {
     padding: 3rem 0  3rem 0;
 }
 
-.rel-box a{
+.relbox a{
     text-decoration: none;
     color: black;
 }

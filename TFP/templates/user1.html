@@ -14,13 +14,13 @@ User Home | TFP
   <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'imges/bannerSkel.jpg' %}" class="d-block w-100" alt="...">
+        <img src="{% static 'imges/banner3.jpg' %}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'imges/bannerSkel.jpg' %}" class="d-block w-100" alt="...">
+        <img src="{% static 'imges/banner2.jpg' %}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'imges/bannerSkel.jpg' %}" class="d-block w-100" alt="...">
+        <img src="{% static 'imges/banner1.jpg' %}" class="d-block w-100" alt="...">
       </div>
     </div>
   </div>
@@ -34,15 +34,15 @@ User Home | TFP
       <p>Men's Topwear</p>
     </div>
     <div class="cat-ge">
-      <a href="{% url 'all_products' %}"><img src="{% static 'imges/menbottm.jpg' %}" alt=""></a>
+      <a href="{% url 'men_bottomwear' %}"><img src="{% static 'imges/menbottm.jpg' %}" alt=""></a>
       <p>Men's Bottomwear</p>
     </div>
     <div class="cat-ge">
-      <a href=""><img src="{% static 'imges/fusion.jpg' %}" alt=""></a>
+      <a href="{% url 'women_fusion' %}"><img src="{% static 'imges/fusion.jpg' %}" alt=""></a>
       <p>Women's Fusion Wear</p>
     </div>
     <div class="cat-ge">
-      <a href=""><img src="{% static 'imges/ethh.png' %}" alt=""></a>
+      <a href="{% url 'women_ethnic' %}"><img src="{% static 'imges/ethh.png' %}" alt=""></a>
       <p>Women's Ethinic Wear</p>
     </div>
   </div>

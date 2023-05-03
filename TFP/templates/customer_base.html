@@ -58,10 +58,10 @@
 
     <!-- search bar -->
     <div class="search">
-      <form action="" method="post">
+      <!-- <form action="" method="post">
         <input type="text" class="search-bar" placeholder="search for designers...">
         <button type="submit" class="search-button"><i class="fa fa-search fa-lg"></i></button>
-      </form>
+      </form> -->
     </div>
 
     <!-- user profile -->
@@ -71,12 +71,12 @@
 
     <!-- whish list -->
     <div >
-      <a href="whishlist.html" class="whish-list"><i title="whish list" class="fa-regular fa-heart fa-lg"></i></a>
+      <a href="{% url 'wishlist' %}" class="whish-list"><i title="whish list" class="fa-regular fa-heart fa-lg"></i></a>
     </div>
 
     <!-- cart -->
     <div >
-      <a href="cart.html" class="cart"><i title="cart" class="fa-solid fa-bag-shopping fa-lg"></i></a>
+      <!-- <a href="{% url 'cart' %}" class="cart"><i title="cart" class="fa-solid fa-bag-shopping fa-lg"></i></a> -->
     </div>
 
     <!-- logout -->
