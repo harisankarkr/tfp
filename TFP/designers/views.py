@@ -77,10 +77,11 @@ def add_product(request):
             product.category2 = form.cleaned_data['category2']
             product.save()
             form.save_m2m()
+            print(request.POST)
             messages.success(request, 'Product added successfully.')
             return redirect('designer_dashboard')
     else:
-        form = ProductForm()
+        form = ProductForm() 
 
     return render(request, 'addPrd.html', {'form': form})
 

@@ -1,0 +1,110 @@
+{% extends 'customer_base.html' %}
+
+{% block title %}
+User Home | TFP 
+{% endblock%}
+
+{% load static %}
+
+
+{% block content %}
+
+  
+
+  <!-- space -->
+  <div class="space">
+
+  </div>
+  
+  <!-------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="prd-heading">
+        <h4>Women's Ethnic Wear</h4>
+    </div>
+
+    <div class="sel-cat">
+        <form method="get">
+
+            <!-- category -->
+            <label for="">select category  &nbsp; &nbsp;</label>
+            <!-- Product Catregory -->
+            <select name="cat2" id="cat2">
+                <option value="All">All</option>
+                <option value="Kurthas">Kurthas</option>
+                <option value="Salwars & Churidars">Salwars & Churidars</option>
+                <option value="Skirts & Ghagras">Skirts & Ghagras</option>
+                <option value="Sarees">Sarees</option>
+                <option value="Dress materials">Dress materials</option>
+                <option value="Dupattas">Dupattas</option>
+            </select>
+
+            <!-- filter -->
+            <label for="">filter  &nbsp; &nbsp;</label>
+            <select name="priceRange" id="priceRange">
+              <option value="">Choose a option</option>
+              <option value="lowTohigh">High to Low</option>
+              <option value="highTolow">Low to High</option>
+            </select>
+          </form>
+    </div>
+
+
+
+
+
+<!-- product cards -->
+<div class="relbox">
+  {% for product in products %}
+    <a href="{% url 'product_detail' product.id %}" class="prd-card">
+      <img src="{{ product.image1.url }}" alt="{{ product.prd_name }}" loading="lazy">
+      <h4>{{ product.prd_name }}</h4>
+      <p>{{ product.category2 }}</p>
+      <h6>&#x20b9; {{ product.price }}</h6>
+    </a>
+  {% endfor %}
+</div>
+  
+
+  
+<script>
+  const priceRangeSelect = document.getElementById("priceRange");
+  const productContainer = document.querySelector(".relbox");
+  let products = Array.from(productContainer.querySelectorAll(".prd-card"));
+
+  priceRangeSelect.addEventListener("change", () => {
+    if (priceRangeSelect.value === "lowTohigh") {
+      products.sort((a, b) => {
+        return Number(a.querySelector("h6").textContent.substring(3)) - Number(b.querySelector("h6").textContent.substring(3));
+      });
+    } else if (priceRangeSelect.value === "highTolow") {
+      products.sort((a, b) => {
+        return Number(b.querySelector("h6").textContent.substring(3)) - Number(a.querySelector("h6").textContent.substring(3));
+      });
+    }
+
+    // Remove existing product elements
+    productContainer.innerHTML = "";
+
+    // Append the sorted products to the container
+    products.forEach((product) => {
+      productContainer.appendChild(product);
+    });
+  });
+
+
+  const cat2Select = document.getElementById("cat2");
+  cat2Select.addEventListener("change", () => {
+  const selectedCategory = cat2Select.value;
+  products.forEach((product) => {
+    if (selectedCategory === "All" || product.querySelector("p").textContent === selectedCategory) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+  });
+});
+
+</script>
+
+
+  {% endblock%}  

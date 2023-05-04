@@ -54,7 +54,7 @@
             </div>
         {% else %}
             <div class="dp">
-                <img src="/static/imges/skel.jpg" alt="Default DP">
+                <img src="/static/imges/user.png" alt="Default DP">
             </div>
         {% endif %}
         <h2>{{ designer.name }}</h2>
@@ -91,8 +91,8 @@
 <div class="des-btns">
     <a href="{% url 'designer_dashboard' %}"><button>View Products</button></a>
     <a href="{% url 'addPrd' %}"><button>Add Products</button></a>
-    <a href=""><button>View Business</button></a>
-    <button>Shipping Requests</button>
+    <a href="{% url 'error' %}"><button>View Business</button></a>
+    <a href="{% url 'error' %}"><button>Shipping Requests</button></a>
     <a href="{% url 'logout_view' %}"><button>Sign Out</button></a>
     <!-- <button>View Business</button> -->
 </div>

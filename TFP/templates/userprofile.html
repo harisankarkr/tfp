@@ -19,7 +19,7 @@ User Home | TFP
     <!-- nav for user profile (in style-3) -->
     <div class="prf-nav">
         <button id="user-btn1">Manage Account</button>
-        <!-- <button id="user-btn2">Your Orders</button> -->
+        <button id="user-btn2">Your Orders</button>
         <button id="user-btn3">Purchase History</button>
     </div>
 
@@ -55,28 +55,22 @@ User Home | TFP
     </div>
 
 
-    <!-- Your Orders -->
-    <!-- <div class="prd-heading">
-        <h4>Your Orders</h4>
-    </div> -->
 
-    <div class="rel-box">
-            <div class="prd-card">
-                <img src="{% static 'imges/skel.jpg' %}" alt="">
-                <p>Arriving on dd/mm/yyyy</p>
-            </div>
-
-                <div class="prd-card">
-                    <img src="{% static 'imges/skel.jpg' %}" alt="">
-                    <p>Arriving on dd/mm/yyyy</p>
-                </div>
-    </div>
+<!-- Your Pending Orders -->
+<div class="relbox1">
+    {% for order in orders %}
+        <div class="prd-card">
+            <img src="{{ order.product.image1.url }}" alt="{{ order.product.name }} image">
+            <p>{{ order.product.name }}</p>
+            <p>Date of Booking: {{ order.booking_date|date:"F d, Y" }}</p>
+        </div>
+    {% empty %}
+        <h2 style="margin-bottom: 11rem;">You have no pending orders...</h2>
+    {% endfor %}
+</div>
 
 
-    <!-- History -->
-    <!-- <div class="prd-heading">
-        <h4>Purchase History</h4>
-    </div> -->
+
 
     <div class="his-tabel">
         <table>
@@ -90,7 +84,7 @@ User Home | TFP
 
             <!-- table content -->
             <tr>
-                <td><img src="imges/skel.jpg" alt=""></td>
+                <td><img src="" alt=""></td>
                 <td><label for="size">Men T-shirt</label></td>
                 <td><label for="date">dd/mm/yyyy</label></td>
                 <td><label id="rev" for="review">Lorem ipsum dolor sit amet consecrehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>
@@ -99,7 +93,7 @@ User Home | TFP
 
             <!-- table content -->
             <tr>
-                <td><img src="imges/skel.jpg" alt=""></td>
+                <td><img src="" alt=""></td>
                 <td><label for="size">Men T-shirt</label></td>
                 <td><label for="date">dd/mm/yyyy</label></td>
                 <td><label id="rev" for="review">abo maxime reprehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>

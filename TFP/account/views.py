@@ -92,3 +92,8 @@ def logout_view(request):
 def index_login_view(request):
     return render(request,"index.html",{})
 
+
+# error
+# ==========================
+def error(request):
+    return render(request,"error.html",{})

@@ -56,7 +56,8 @@ User Home | TFP
                 <!-- prd det -->
                 <h3>{{ product.prd_name }}</h3>
                 <h6>{{ product.category1 }}</h6>
-                <br>
+                <p>{{ product.category2 }}</p>
+
             <!-- spec table -->
             <table>
                 <tr>
@@ -88,7 +89,6 @@ User Home | TFP
                     <label for=""><input type="radio" name="size" id="size-xl"> XL</label>                    
                 </div> -->
 
-                <br>
 
                 <!-- price -->
                 <h3 id="pr">&#x20b9;{{ product.price }}</h3>
@@ -97,8 +97,7 @@ User Home | TFP
 
             <div class="btns">
                
-                <button class="buy-btn"><a href="{% url 'cart' %}">Buy Now</a></button>
-                <!-- <button id="add-to-cart-btn" class="cart-btn"><a href="{% url 'cart' %}">Buy Now</a></button> -->
+                <button class="buy-btn"><a href="{% url 'cart' product_id=product.id %}">Buy Now</a></button>
                 <button title="add to whishlist" class="whish-btn"><a href="{% url 'add_to_wishlist' product_id=product.id %}"><i class="fa fa-heart fa-lg"></i></a></button>
    
             </div>

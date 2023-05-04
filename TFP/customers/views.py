@@ -76,17 +76,17 @@ def men_topwear(request):
 # Men's Bottomwear
 def men_bottomwear(request):
     products = Product.objects.filter(category1="Men's Bottomwear")
-    return render(request, 'user2.html', {'products': products})
+    return render(request, 'menbottom.html', {'products': products})
 
 # Women's Fusion Wear
 def women_fusion(request):
     products = Product.objects.filter(category1="Women's Fusion Wear")
-    return render(request, 'user2.html', {'products': products})
+    return render(request, 'fusion.html', {'products': products})
 
 # Women's Ethnic Wear
 def women_ethnic(request):
     products = Product.objects.filter(category1="Women's Ethnic Wear")
-    return render(request, 'user2.html', {'products': products})
+    return render(request, 'ethnic.html', {'products': products})
 
 
 # =======================================================================================================
@@ -112,21 +112,6 @@ def designer_profile(request, pk):
 
 # =================================================================================================================
 # whish list
-
-# def wishlist(request):
-#     wishlist = get_object_or_404(Wishlist, user=request.user)
-#     products = wishlist.products.all()
-#     return render(request, 'wishlist.html', {'products': products})
-
-# def wishlist(request):
-#     wishlist = get_object_or_404(Wishlist, user=request.user)
-#     products = wishlist.products.all()
-#     customer = CustomerProfile.objects.get(user=request.user)
-#     context = {
-#         'customer': customer,
-#         'products': products,
-#     }
-#     return render(request, 'wishlist.html', context)
 
 def wishlist(request):
     wishlist = get_object_or_404(Wishlist, user=request.user)
@@ -161,5 +146,104 @@ def remove_from_wishlist(request, pk):
 # cart
 # -----------
 
-def cart(request):
-    return render(request,'cart.html')
+# def cart(request):
+#     return render(request,'cart.html')
+
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Product
+
+def cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    customer = CustomerProfile.objects.get(user=request.user)
+    designer = product.designer
+    context = {'product': product, 'customer': customer, 'designer': designer}
+    return render(request, 'cart.html', context)
+
+
+# --------------------------------------------------------------------------------------------------------------
+# order
+# ------------------
+
+# from django.shortcuts import render, redirect, get_object_or_404
+# from django.contrib import messages
+# from .models import Order
+
+# def create_order(request, product_id):
+#     if request.method == 'POST':
+#         customer = request.user
+#         product = get_object_or_404(Product, pk=product_id)
+#         designer = product.designer
+#         size = request.POST.get('size')
+#         quantity = int(request.POST.get('quantity'))
+#         price = float(request.POST.get('price'))
+#         total = float(price) * int(quantity)
+#         from_address = designer.email
+#         to_address = customer.email
+#         status = 'pending'
+
+#         order = Order(customer=customer, product=product, designer=designer, size=size, quantity=quantity, price=price,
+#                       total=total, from_address=from_address, to_address=to_address, status=status)
+#         order.save()        
+
+#         messages.success(request, 'Your order has been placed!')
+#         return redirect('user_profile')
+
+#     product = get_object_or_404(Product, pk=product_id)
+#     context = {
+#         'product': product
+#     }
+#     return render(request, 'cart.html', context)
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Order
+
+def create_order(request, product_id):
+    if request.method == 'POST':
+        # Retrieve form data and create new order object
+        customer = request.user
+        product = get_object_or_404(Product, pk=product_id)
+        designer = product.designer
+        size = request.POST.get('size')
+        quantity = int(request.POST.get('quantity'))
+        price = float(request.POST.get('price'))
+        total = float(price) * int(quantity)
+        from_address = designer.email
+        to_address = customer.email
+        status = 'pending'
+        order = Order(customer=customer, product=product, designer=designer, size=size, quantity=quantity, price=price,
+                      total=total, from_address=from_address, to_address=to_address, status=status)
+        order.save()
+
+        # Render success popup message with context
+        context = {
+            'message': 'Your order has been placed!',
+            'product_name': product
+        }
+        return render(request, 'success_popup.html', context)
+
+    # Render product form with context
+    product = get_object_or_404(Product, pk=product_id)
+    context = {'product': product}
+    return render(request, 'cart.html', context)
+
+
+
+# ---------------------------------------------------------------------------------------------------------------
+
+# pending orders / your orders
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Order
+
+
+@login_required
+def tour_orders(request):
+    print(request.user)
+    orders = Order.objects.filter(customer=request.user, status='pending')
+    print(orders)
+    return render(request, 'userprofile.html', {'orders': orders})
+
+
+# ================================================================================

@@ -17,9 +17,9 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from customers.views import remove_from_wishlist
+from customers.views import (remove_from_wishlist, create_order, tour_orders)
 from customers.views import (add_to_wishlist, wishlist, cart, men_bottomwear, women_fusion, women_ethnic)
-from account.views import (index_login_view, registration, user_login, logout_view,)
+from account.views import (index_login_view, registration, user_login, logout_view, error)
 from designers.views import (update_stock,delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
 from customers.views import (designer_profile,all_products,men_topwear,product_detail,userpage2,customer_dashboard,userpage1,user_profile,edit_customer_address)
 from django.conf.urls.static import static
@@ -30,6 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # index
     path('', index_login_view, name="index"),
+    
+    # error
+    path('error', error , name="error"),
 
     # ----------------------------------------------------------------------------------------------------------
     # registration and login
@@ -118,6 +121,11 @@ urlpatterns = [
     path('remove/<int:pk>', remove_from_wishlist, name='remove_from_wishlist'),
 
     # cart
-    path('cart', cart, name='cart'),
+    path('cart/<int:product_id>', cart, name='cart'),
+
+    # order
+    path('create_order/<int:product_id>', create_order, name='create_order'),
+    # pending orders
+    path('tour_orders', tour_orders, name='tour_orders'),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
