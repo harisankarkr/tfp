@@ -1,0 +1,49 @@
+{% extends 'designer_base.html' %}
+
+{% block title %}
+View Business
+{% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{% for order in orders %}
+  <div class="cart-tabel">
+    <table>
+        <!-- table content -->
+        <hr>
+
+        <tr>
+            <th>Prd Name</th>
+            <th></th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Booking Date</th>
+            <th>Status</th>
+            <th>To Address</th>
+        </tr>
+
+        <tr>
+            <td>{{ order.product.prd_name }}</td>
+            <td>
+                <img src="{{ order.product.image1.url }}" alt="{{ product.prd_name }}" style=" width : 6rem; height: auto;">
+            </td>
+            <td>{{ order.size }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.total }}</td>
+            <td>{{ order.booking_date|date:"F d, Y" }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.to_address }}</td>
+        </tr>
+    </table>
+</div>
+{% empty %}
+  <p>No completed orders yet.</p>
+{% endfor %}
+
+ 
+{% endblock %}

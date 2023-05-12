@@ -1,0 +1,79 @@
+{% extends 'customer_base.html' %}
+
+{% block title %}
+User Home | TFP 
+{% endblock%}
+
+{% load static %}
+
+
+{% block content %}
+
+  
+  <!-------------------------------------------------------------------------------------------------------------- -->
+    
+    <div class="prd-heading">
+        <p>Welcome Back</p><h3> {{ customer.name }}</h3>
+
+    <!-- messages -->
+        <div id="errMsg">
+            {% if messages %}
+            <div class="messages" >
+            {% for message in messages %}
+                <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+
+    <!-- nav for user profile (in style-3) -->
+    <div class="prf-nav">
+        <a href="{% url 'user_profile' %}"><button id="">Manage Account</button></a>
+        <a href="{% url 'orders_view' %}"><button id="">Your Orders</button></a>
+        <a href="{% url 'history' %}"><button id="">Purchase History</button></a>
+    </div>
+
+
+    <div class="histabel">
+        <table>
+            <!-- headings -->
+            <tr>
+                <th></th>
+                <th>Details</th>
+                <th>Date</th>
+                <th></th>
+                <th>Review</th>
+            </tr>
+        
+            <!-- table content -->
+            {% for order in orders %}
+            <tr>
+                <td><img src="{{ order.product.image1.url }}" alt="{{ product.prd_name }}" style=" width : 6rem; height: auto;"></td>
+                <td>{{ order.product.prd_name }} <br> 
+                    Size :{{ order.size }} |
+                    Qty: {{ order.quantity }} <br> 
+                    Price: {{ order.price }} <br> 
+                    Total: {{ order.total }} <br> 
+                    From: {{ order.from_address }}</td>
+                <td>{{ order.booking_date|date:"F d, Y" }}</td>
+                <td>{{ order.review }}</td>
+                <td>
+                    <form method="post" action="{% url 'submit_review' order.id %}">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" name="review" placeholder="Enter review...">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No orders found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </div>
+
+{% endblock%}

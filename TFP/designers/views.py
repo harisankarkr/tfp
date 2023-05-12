@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from designers.forms import ProductForm
 from account.models import Designer
 from designers.models import Product
+from customers.models import Order
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -165,4 +166,56 @@ def update_stock(request, pk):
 
     context = {'product': product, 'form': form}
     return render(request, 'stockMan.html', context)
+
+# ---------------------------------------------------------------------------------------------------
+
+# designer order status
+
+from django.shortcuts import render, redirect
+from customers.models import Order
+
+@login_required
+def designer_orders(request):
+    designer = get_object_or_404(Designer, user=request.user)
+    context = {'designer': designer}
+    return render(request, 'designer_order.html', context)
+
+# @login_required
+# def change_order_status(request, order_id):
+#     order = get_object_or_404(Order, id=order_id)
+#     if order.designer.user != request.user:
+#         return redirect('home')
+#     if order.status == 'pending':
+#         order.status = 'done'
+#         order.save()
+#     return redirect('designer_order')
+
+@login_required
+def change_order_status(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if order.designer.user != request.user:
+        return redirect('home')
+    if order.status == 'pending':
+        order.status = 'done'
+        order.save()
+        product = order.product
+        product_name = product.prd_name
+        product.small += order.product.small
+        product.medium += order.product.medium
+        product.large += order.product.large
+        product.extra_large += order.product.extra_large
+        product.save()
+        messages.success(request, f"The order for {product_name} has been shipped.")
+    return redirect('designer_orders')
+
+
+
+
+# designer business
+@login_required
+def designer_business(request, designer_id):
+    designer_business = Order.objects.filter(designer_id=designer_id, status='done')
+    context = {'orders': designer_business}
+    return render(request, 'designer_business.html', context)
+
 

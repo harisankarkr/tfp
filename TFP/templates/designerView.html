@@ -106,8 +106,8 @@ User Home | TFP
             <hr>
             
             <div class="btns">
-                <!-- <button class="buy-btn">Buy Now</button> -->
-                <button class="cart-btn">Add to Cart</button>
+
+                <button class="buy-btn"><a href="{% url 'cart' product_id=product.id %}">Buy Now</a></button>
                 <button title="add to whishlist" class="whish-btn"><a href="{% url 'add_to_wishlist' product_id=product.id %}"><i class="fa fa-heart fa-lg"></i></a></button>
    
             </div>

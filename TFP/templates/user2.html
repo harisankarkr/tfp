@@ -42,8 +42,8 @@ User Home | TFP
             <label for="">filter  &nbsp; &nbsp;</label>
             <select name="priceRange" id="priceRange">
               <option value="">Choose a option</option>
-              <option value="lowTohigh">High to Low</option>
-              <option value="highTolow">Low to High</option>
+              <option value="lowTohigh">Low to High</option>
+              <option value="highTolow">High to Low</option>
             </select>
           </form>
     </div>
@@ -67,6 +67,7 @@ User Home | TFP
 
   
 <script>
+
   const priceRangeSelect = document.getElementById("priceRange");
   const productContainer = document.querySelector(".relbox");
   let products = Array.from(productContainer.querySelectorAll(".prd-card"));
@@ -74,11 +75,11 @@ User Home | TFP
   priceRangeSelect.addEventListener("change", () => {
     if (priceRangeSelect.value === "lowTohigh") {
       products.sort((a, b) => {
-        return Number(a.querySelector("h6").textContent.substring(3)) - Number(b.querySelector("h6").textContent.substring(3));
+        return Number(a.querySelector("h6").textContent.substring(2)) - Number(b.querySelector("h6").textContent.substring(2));
       });
     } else if (priceRangeSelect.value === "highTolow") {
       products.sort((a, b) => {
-        return Number(b.querySelector("h6").textContent.substring(3)) - Number(a.querySelector("h6").textContent.substring(3));
+        return Number(b.querySelector("h6").textContent.substring(2)) - Number(a.querySelector("h6").textContent.substring(2));
       });
     }
 
@@ -90,6 +91,9 @@ User Home | TFP
       productContainer.appendChild(product);
     });
   });
+
+
+  // ---------------------------------------------------------------------------------
 
   const cat2Select = document.getElementById("cat2");
   cat2Select.addEventListener("change", () => {

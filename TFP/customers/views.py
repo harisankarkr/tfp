@@ -23,6 +23,10 @@ def userpage2(request):
 def customer_dashboard(request):
     return render(request,'customer_base.html',{})
 
+# customer - history
+# def history(request):
+#     return render(request,'history.html',{})
+
 # user profile
 def user_profile(request):
     user = request.user
@@ -30,7 +34,7 @@ def user_profile(request):
     return render(request, "userprofile.html", {'customer': customer})
 
 # ==================================================================================================
-# edit designer profile
+# edit customer profile
 # ===========================
 
 
@@ -96,10 +100,19 @@ def women_ethnic(request):
 #     product = get_object_or_404(Product, pk=pk)
 #     return render(request, 'user3.html', {'product': product})
 
+# def product_detail(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+#     designer = product.designer
+#     return render(request, 'user3.html', {'product': product, 'designer': designer})
+
+from django.db.models import Q
+
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     designer = product.designer
-    return render(request, 'user3.html', {'product': product, 'designer': designer})
+    reviews = Order.objects.filter(Q(product=product) & ~Q(review='none'))
+    return render(request, 'user3.html', {'product': product, 'designer': designer, 'reviews': reviews})
+
 
 
 # =============================================================================================================
@@ -187,7 +200,7 @@ def cart(request, product_id):
 #         order.save()        
 
 #         messages.success(request, 'Your order has been placed!')
-#         return redirect('user_profile')
+#         return redirect('orders_view')
 
 #     product = get_object_or_404(Product, pk=product_id)
 #     context = {
@@ -195,55 +208,116 @@ def cart(request, product_id):
 #     }
 #     return render(request, 'cart.html', context)
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Order
 
 def create_order(request, product_id):
     if request.method == 'POST':
-        # Retrieve form data and create new order object
         customer = request.user
         product = get_object_or_404(Product, pk=product_id)
         designer = product.designer
         size = request.POST.get('size')
         quantity = int(request.POST.get('quantity'))
         price = float(request.POST.get('price'))
+        
+        # Check if requested quantity is available for the selected size
+        if size == 'small' and quantity > product.small:
+            messages.error(request, 'Sorry..! Product is not available in the requested quantity.')
+            return redirect('cart', product_id=product_id)
+        elif size == 'medium' and quantity > product.medium:
+            messages.error(request, 'Sorry..! Product is not available in the requested quantity.')
+            return redirect('cart', product_id=product_id)
+        elif size == 'large' and quantity > product.large:
+            messages.error(request, 'Sorry..! Product is not available in the requested quantity.')
+            return redirect('cart', product_id=product_id)
+        elif size == 'extra_large' and quantity > product.extra_large:
+            messages.error(request, 'Sorry..! Product is not available in the requested quantity.')
+            return redirect('cart', product_id=product_id)
+        
+        # Calculate total price
         total = float(price) * int(quantity)
+        
+        # Update product stock
+        if size == 'small':
+            product.small -= quantity
+        elif size == 'medium':
+            product.medium -= quantity
+        elif size == 'large':
+            product.large -= quantity
+        elif size == 'extra_Large':
+            product.extra_large -= quantity
+        product.save()
+        
+        # Create order
         from_address = designer.email
         to_address = customer.email
         status = 'pending'
+
         order = Order(customer=customer, product=product, designer=designer, size=size, quantity=quantity, price=price,
                       total=total, from_address=from_address, to_address=to_address, status=status)
         order.save()
 
-        # Render success popup message with context
-        context = {
-            'message': 'Your order has been placed!',
-            'product_name': product
-        }
-        return render(request, 'success_popup.html', context)
+        messages.success(request, 'Your order has been placed!')
+        return redirect('orders_view')
 
-    # Render product form with context
     product = get_object_or_404(Product, pk=product_id)
-    context = {'product': product}
+    context = {
+        'product': product
+    }
     return render(request, 'cart.html', context)
-
 
 
 # ---------------------------------------------------------------------------------------------------------------
 
 # pending orders / your orders
 
+# from django.shortcuts import render
+# from .models import Order
+
+# def orders_view(request):
+#     orders = Order.objects.all()
+#     print(len(orders))
+#     context = {'orders': orders}
+#     return render(request, 'order.html', context)
+
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from .models import Order
 
+def orders_view(request):
+    # Filter orders by the logged-in user and status="pending"
+    user = request.user
+    customer = CustomerProfile.objects.get(user=user)
+    orders = Order.objects.filter(customer=request.user, status="pending")
 
-@login_required
-def tour_orders(request):
-    print(request.user)
-    orders = Order.objects.filter(customer=request.user, status='pending')
-    print(orders)
-    return render(request, 'userprofile.html', {'orders': orders})
+    # Create a context dictionary to pass data to the template
+    context = {'orders': orders, 'customer': customer}
+
+    # Render the template with the context data
+    return render(request, 'order.html', context)
 
 
 # ================================================================================
+
+@login_required
+def history(request):
+    user = request.user
+    customer = CustomerProfile.objects.get(user=user)
+    orders = Order.objects.filter(customer=user, status='done')
+    context = {'orders': orders,  'customer': customer}
+    return render(request, 'history.html', context)
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import Order
+
+def submit_review(request, order_id):
+    order = get_object_or_404(Order, id=order_id, customer=request.user, status='done')
+    if request.method == 'POST':
+        review = request.POST.get('review')
+        if review:
+            order.review = review
+            order.save()
+            messages.success(request, 'Your review has been submitted successfully.')
+        else:
+            messages.error(request, 'Please enter a valid review.')
+        return redirect('history')
+    else:
+        return render(request, 'submit_review.html', {'order': order})

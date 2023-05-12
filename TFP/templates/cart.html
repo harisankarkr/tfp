@@ -18,7 +18,7 @@ User Home | TFP
     {% if messages %}
     <div class="messages" >
         {% for message in messages %}
-            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            <p style="text-align: center; color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
         {% endfor %}
     </div>
     {% endif %}
@@ -58,7 +58,7 @@ User Home | TFP
                 </td>
                 <td>
                     <select name="quantity" id="product-quantity">
-                        <option value="1">1</option>
+                        <option value="1" selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -101,7 +101,7 @@ User Home | TFP
         var dateElement = document.getElementById("date");
         dateElement.innerHTML = today.toDateString();
     </script>
-    
+
 
     <div class="total">
         <div>

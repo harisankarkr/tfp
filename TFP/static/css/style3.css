@@ -188,7 +188,7 @@
 
 /* purchase history tble */
 
-.his-tabel{
+.histabel{
     width: 100%;
     display: flex;
     align-items: center;
@@ -196,29 +196,29 @@
     padding: 1rem 0 2rem 0;
 }
 
-.his-tabel table{
+.histabel table{
     /* border: 1px solid black; */
     width: 90%;
     text-align: center;
 }
 
-.his-tabel th{
+.histabel th{
     padding: 2rem;
     /* border-bottom: 1px solid black; */
 }
 
-.his-tabel td{
+.histabel td{
     padding: 1rem;
     border-bottom: 1px solid #ddd;
     background-color: #e2e6ec;
 }
 
-.his-tabel img{
+.histabel img{
     width: 10rem;
     height: auto;
 }
 
-.his-tabel label{
+.histabel label{
     font-size: small;
     padding: 0 .5rem 0 .5rem;
 }

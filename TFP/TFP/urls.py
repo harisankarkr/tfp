@@ -17,7 +17,8 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from customers.views import (remove_from_wishlist, create_order, tour_orders)
+from designers.views import (designer_orders,  change_order_status, designer_business)
+from customers.views import (remove_from_wishlist, create_order, orders_view, history, submit_review)
 from customers.views import (add_to_wishlist, wishlist, cart, men_bottomwear, women_fusion, women_ethnic)
 from account.views import (index_login_view, registration, user_login, logout_view, error)
 from designers.views import (update_stock,delete_product_view,delete_product,edit_designer_profile,designer_dashboard,add_product_view,add_product,base,update,designer_registration,edit_info,)
@@ -57,6 +58,8 @@ urlpatterns = [
     path('edit_info',edit_info, name='edit_info'),
     # edit designer profile - function
     path('edit_designer_profile',edit_designer_profile, name="edit_designer_profile"),
+    
+  
 
     
     # --------------------------------------------------------------------------------------------------------------
@@ -114,6 +117,8 @@ urlpatterns = [
     # edit customer address function
     path('edit_customer_address',edit_customer_address, name='edit_customer_address'),
     
+        # history
+    path('history', history, name='history'),
 
     # whishlist (view , add , remove) 
     path('wishlist', wishlist, name='wishlist'),
@@ -126,6 +131,16 @@ urlpatterns = [
     # order
     path('create_order/<int:product_id>', create_order, name='create_order'),
     # pending orders
-    path('tour_orders', tour_orders, name='tour_orders'),
+    path('orders_view', orders_view, name='orders_view'),
+    # review
+    path('submit_review/<int:order_id>/', submit_review, name='submit_review'),
+
+
+    # designer - order functions
+    path('designer_orders', designer_orders, name='designer_orders'),
+    path('order/<int:order_id>/change_status/', change_order_status, name='change_order_status'),
+    path('designers/<int:designer_id>/business/', designer_business, name='designer_business'),
+
+
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

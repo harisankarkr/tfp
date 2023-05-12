@@ -1,0 +1,62 @@
+{% extends 'designer_base.html' %}
+
+{% block title %}
+Shipping Requests
+{% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <p style="text-align: center; color: green;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% for order in designer.orders.all %}
+    {% if order.status == 'pending' %}
+
+        <!-- cart table -->
+        <div class="cart-tabel">
+            <table>
+                <!-- table content -->
+                <hr>
+
+                <tr>
+                    <th>Prd Name</th>
+                    <th></th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>{{ order.product.prd_name }}</td>
+                    <td>
+                        <img src="{{ order.product.image1.url }}" alt="{{ product.prd_name }}" style=" width : 6rem; height: auto;">
+                    </td>
+                    <td>{{ order.size }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.price }}</td>
+                    <td>{{ order.total }}</td>
+                    <td>
+                        <form action="{% url 'change_order_status' order.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-success btn-sm">Mark as Shipped</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    {% endif %}
+{% empty %}
+    <p>No completed orders yet.</p>
+{% endfor %}
+
+{% endblock %}

@@ -18,4 +18,4 @@ class DesignerProfileForm(forms.ModelForm):
 class StockForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['small', 'medium', 'large', 'extra_large']
+        fields = ['small', 'medium', 'large', 'extra_large', 'price']

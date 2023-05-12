@@ -14,10 +14,6 @@ class Wishlist(models.Model):
 
 # order model
 class Order(models.Model):
-    STATUS_CHOICES = [
-        ('approved', 'Approved'),
-        ('pending', 'Pending'),
-    ]
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     designer = models.ForeignKey(Designer, on_delete=models.CASCADE, related_name='orders')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
@@ -28,7 +24,8 @@ class Order(models.Model):
     from_address = models.CharField(max_length=255)
     to_address = models.CharField(max_length=255)
     booking_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, default='pending')
+    review = models.CharField(max_length=255, default='none')
     
     def __str__(self):
         return f"{self.customer} - {self.product} ({self.size}) - {self.status}"

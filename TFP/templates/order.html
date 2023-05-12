@@ -1,0 +1,99 @@
+{% extends 'customer_base.html' %}
+
+{% block title %}
+User Home | TFP 
+{% endblock%}
+
+{% load static %}
+
+
+{% block content %}
+
+  
+  <!-------------------------------------------------------------------------------------------------------------- -->
+    
+    <div class="prd-heading">
+        <p>Welcome Back</p><h3> {{ customer.name }}</h3>
+
+    <!-- messages -->
+        <div id="errMsg">
+            {% if messages %}
+            <div class="messages" >
+            {% for message in messages %}
+                <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+
+    <!-- nav for user profile (in style-3) -->
+    <div class="prf-nav">
+        <a href="{% url 'user_profile' %}"><button id="">Manage Account</button></a>
+        <a href="{% url 'orders_view' %}"><button id="">Your Orders</button></a>
+        <a href="{% url 'history' %}"><button id="">Purchase History</button></a>
+    </div>
+
+
+
+<!-- Your Pending Orders -->
+<!-- <div class="relbox1">
+    {% for order in orders %}
+        <div class="prd-card">
+            <img src="{{ order.product.image1.url }}" alt="{{ order.product.name }} image">
+            <p>{{ order.product.name }}</p>
+            <p>Date of Booking: {{ order.booking_date|date:"F d, Y" }}</p>
+        </div>
+    {% empty %}
+        <h2 style="margin-bottom: 11rem;">You have no pending orders...</h2>
+    {% endfor %}
+</div> -->
+
+
+<div class="relbox">
+{% for order in orders %}
+    <div class="prd-card">
+        <img src="{{ order.product.image1.url }}" alt="{{ order.product.name }} image">
+        <p>{{ order.product.name }}</p>
+        <p>Date of Booking: {{ order.booking_date|date:"F d, Y" }}</p>
+        <p>Status: {{ order.status }}</p>
+    </div>
+{% empty %}
+    <h2 style="margin-bottom: 11rem;">You have no pending orders...</h2>
+{% endfor %}
+</div>
+
+
+
+    <div class="his-tabel">
+        <table>
+            <!-- headings -->
+            <tr>
+                <th>Product</th>
+                <th>Details</th>
+                <th>Date</th>
+                <th>Review</th>
+            </tr>
+
+            <!-- table content -->
+            <tr>
+                <td><img src="" alt=""></td>
+                <td><label for="size">Men T-shirt</label></td>
+                <td><label for="date">dd/mm/yyyy</label></td>
+                <td><label id="rev" for="review">Lorem ipsum dolor sit amet consecrehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>
+                <td><button title="Review" type="submit" class="edit-btn1"><i class="fa-solid fa-pen fa-lg"></i></button></td>
+            </tr>
+
+            <!-- table content -->
+            <tr>
+                <td><img src="" alt=""></td>
+                <td><label for="size">Men T-shirt</label></td>
+                <td><label for="date">dd/mm/yyyy</label></td>
+                <td><label id="rev" for="review">abo maxime reprehenderit nemo ad ipsum quos sapiente! Assumenda consequatur fugiat esse ab architecto accusamus, ullam atque. Quos quis aliquid ad!</label></td>
+                <td><button title="Review" type="submit" class="edit-btn1"><i class="fa-solid fa-pen fa-lg"></i></button></td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock%}

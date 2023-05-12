@@ -80,14 +80,6 @@ User Home | TFP
 
             <br>
 
-                <!-- size chart -->
-                <!-- <div class="size-chart">
-                    <p>select size : </p>
-                    <label for=""><input type="radio" name="size" id="size-s"> S</label>
-                    <label for=""><input type="radio" name="size" id="size-m"> M</label>
-                    <label for=""><input type="radio" name="size" id="size-l"> L</label>
-                    <label for=""><input type="radio" name="size" id="size-xl"> XL</label>                    
-                </div> -->
 
 
                 <!-- price -->
@@ -113,30 +105,25 @@ User Home | TFP
     <!-- spec of product & reviews -->
     <div class="spec-rew">
 
-        <!-- rew -->
-        <div class="rew">
+<!-- rew -->
+<div class="rew">
 
+    {% if reviews %}
+    {% for review in reviews %}
+    <!-- review box -->
+    <div class="rev-box">
+        
+        <h4>{{ review.customer.username }}</h4>
+        <p>{{ review.review }}</p>
+        
+    </div>
+    {% endfor %}
+    {% else %}
+    <h5>No reviews yet...</h5>
+    {% endif %}
 
-            <!-- review box -->
-            <div class="rev-box">
-                <h4>User Name</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.labore molestias ipsa ratione nesciunt nam,
-                    quasi aperiam repudiandae ipsum nostrum reiciendis eligendi maxime sequi?</p>
-            </div>
+</div>
 
-            <div class="rev-box">
-                <h4>User Name</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.le ipsum nostrum reiciendis eligendi maxime
-                    sequi?</p>
-            </div>
-
-            <div class="rev-box">
-                <h4>User Name</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.le ipsum nostrum reiciendis eligendi maxime
-                    sequi?</p>
-            </div>
-
-        </div>
 
         <!-- spec -->
         <div class="spec">
