@@ -1,6 +1,7 @@
 from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from account.models import CustomerProfile
 from designers.forms import ProductForm
 from account.models import Designer
 from designers.models import Product
@@ -174,11 +175,31 @@ def update_stock(request, pk):
 from django.shortcuts import render, redirect
 from customers.models import Order
 
+# @login_required
+# def designer_orders(request):
+#     user = request.user
+#     customer = CustomerProfile.objects.get(user=user)
+#     designer = get_object_or_404(Designer, user=request.user)
+#     context = {'designer': designer, 'customer': customer}
+#     return render(request, 'designer_order.html', context)
+
+
 @login_required
 def designer_orders(request):
-    designer = get_object_or_404(Designer, user=request.user)
-    context = {'designer': designer}
+    user = request.user
+    designer = get_object_or_404(Designer, user=user)
+    orders = Order.objects.filter(designer=designer)
+    order_details = []
+    for order in orders:
+        customer_profile = CustomerProfile.objects.get(user=order.customer)
+        address = f"{customer_profile.house}, {customer_profile.landmark}, {customer_profile.city} - {customer_profile.pincode}"
+        order_detail = {'order': order, 'address': address}
+        order_details.append(order_detail)
+    context = {'designer': designer, 'order_details': order_details}
     return render(request, 'designer_order.html', context)
+
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-===-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=
 
 # @login_required
 # def change_order_status(request, order_id):

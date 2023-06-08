@@ -18,20 +18,18 @@ Shipping Requests
 
 {% for order in designer.orders.all %}
     {% if order.status == 'pending' %}
-
         <!-- cart table -->
         <div class="cart-tabel">
             <table>
                 <!-- table content -->
                 <hr>
-
                 <tr>
                     <th>Prd Name</th>
                     <th></th>
-                    <th>Size</th>
-                    <th>Quantity</th>
+                    <th>Size & Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
+                    <th>Shipping Address</th>
                     <th></th>
                 </tr>
 
@@ -40,10 +38,18 @@ Shipping Requests
                     <td>
                         <img src="{{ order.product.image1.url }}" alt="{{ product.prd_name }}" style=" width : 6rem; height: auto;">
                     </td>
-                    <td>{{ order.size }}</td>
-                    <td>{{ order.quantity }}</td>
-                    <td>{{ order.price }}</td>
+                    <td>{{ order.size }} | {{ order.quantity }}</td>
+                    <td>{{ order.price }} </td>
                     <td>{{ order.total }}</td>
+                    <td>
+                        {% for order_detail in order.customer.customerprofile_set.all %}
+                            {% if order_detail == order.customer.customerprofile_set.first %}
+                                {{ order_detail.house }}, {{ order_detail.landmark }}, {{ order_detail.city }} - {{ order_detail.pincode }}
+                            {% endif %}
+                        {% empty %}
+                            <p>No shipping address found.</p>
+                        {% endfor %}
+                    </td>
                     <td>
                         <form action="{% url 'change_order_status' order.id %}" method="POST">
                             {% csrf_token %}
@@ -53,10 +59,11 @@ Shipping Requests
                 </tr>
             </table>
         </div>
-
     {% endif %}
 {% empty %}
     <p>No completed orders yet.</p>
 {% endfor %}
+
+
 
 {% endblock %}

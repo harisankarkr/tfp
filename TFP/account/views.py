@@ -41,11 +41,12 @@ def registration(request):
             return redirect('index')
         else:
             # display form validation errors
-            messages.error(request, 'Please correct the errors below.')
+            form.errors['__all__'] = form.error_class(['Please correct the errors below.'])
     else:
         form = UserRegistrationForm()
 
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'DesigReg.html', {'form': form})
+
 
 
 # ===========================================================================================

@@ -99,4 +99,7 @@ class CustomerProfile(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_full_address(self):
+        return f"{self.house}, {self.landmark}, {self.city}, {self.pincode}"
 
